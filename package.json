@@ -1,0 +1,19 @@
+{
+  "name": "nanoleaf-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VadimGarkusha/nanoleaf-client.git"
+  },
+  "author": "Vadym Harkusha, Yevgeniy Tkachenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VadimGarkusha/nanoleaf-client/issues"
+  },
+  "homepage": "https://github.com/VadimGarkusha/nanoleaf-client#readme"
+}
