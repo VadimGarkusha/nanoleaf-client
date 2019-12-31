@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/VadimGarkusha/nanoleaf-client/issues"
   },
-  "homepage": "https://github.com/VadimGarkusha/nanoleaf-client#readme"
+  "homepage": "https://github.com/VadimGarkusha/nanoleaf-client#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
 }
