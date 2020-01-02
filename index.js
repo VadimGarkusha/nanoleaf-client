@@ -1,23 +1,20 @@
-var request = require('request');
-var dgram = require('dgram');
 var c = require('./const');
+let NanoleafHttpClient = require('./nanoleaf-http-client');
+var dgram = require('dgram');
 
 console.log("Hello World!");
 
-var NanoleafApi = module.exports = function (options) {
-    var self = this;
+//var client = new NanoleafHttpClient('192.168.0.10', 'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9');
 
-    this.testRequest = () => {
-        request('http://www.google.com', function (error, response, body) {
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            console.log('body:', body); // Print the HTML for the Google homepage.
-        });
-    }
-}
+let client = new NanoleafHttpClient('192.168.0.10', 'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9').getRequest('state');
 
-//let test = new NanoleafApi();
-//test.testRequest();
+//var r = test.NanoleafHttpClient('192.168.0.10', 'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9');
+// function getState() {
+//   client.get('state');
+// }
+
+//getState();
+
 
 function broadcastSsdp(socket) {
     var query = Buffer.from(
@@ -52,4 +49,4 @@ function createSocket() {
     }, 3000)
   }
 
-// createSocket();
+//createSocket();
