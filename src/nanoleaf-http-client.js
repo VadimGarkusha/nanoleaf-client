@@ -1,4 +1,4 @@
-import request from 'request';
+import axios from 'axios';
 import c from '../const.js';
 
 class NanoleafHttpClient {
@@ -7,10 +7,12 @@ class NanoleafHttpClient {
    * @param {string} host Device local IP
    * @param {string} token Authorization token
    */
-  constructor(host, token) {
+  constructor(host, token = '') {
     this._token = token;
     this._host = new URL(
-      `http://${host}:${c.NANOLEAF_PORT}/api/v1/${this._token}/`
+      `http://${host}:${c.NANOLEAF_PORT}/api/v1/${
+        this._token ? this._token + '/' : ''
+      }`
     );
   }
 
@@ -33,33 +35,45 @@ class NanoleafHttpClient {
    * @param {string} url
    * @returns {void}
    */
-  getRequest(url) {
+  async getRequest(url = '') {
     console.log(`Path: ${this._host}`);
     console.log(`Url: ${url}`);
 
-    request.get(this._host + url, (error, response, body) => {
-      console.error('error:', error);
-      console.log('statusCode:', response && response.statusCode);
-      console.log('body:', body);
-    });
+    return await axios
+      .get(this._host + url)
+      .then(response => {
+        console.log('statusCode:', response && response.status);
+        console.log('data:', response.data);
+        return response.data;
+      })
+      .catch(error => {
+        console.error('error:', error);
+      });
   }
 
   /**
    * Send put request
    *
    * @param {string} url Resource path
-   * @param {*} data Body
+   * @param {*} body Body
    * @returns {void}
    */
-  putRequest(url, data) {
+  async putRequest(url, body) {
     console.log(`Path: ${this._host}${url}`);
-    console.log(`Body: ${data}`);
+    console.log(`Request Body: ${body}`);
 
-    request.put(this._host + url, { body: data }, (error, response, body) => {
-      console.error('error:', error);
-      console.log('statusCode:', response && response.statusCode);
-      console.log('body:', body);
-    });
+    return await axios
+      .put(this._host + url, body)
+      .then(response => {
+        console.log('statusCode:', response && response.status);
+        console.log('data:', response.data);
+        return response.data;
+      })
+      .catch(error => {
+        console.error('error:', error);
+      });
+  }
+
   }
 }
 
