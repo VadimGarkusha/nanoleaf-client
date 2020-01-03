@@ -4,17 +4,18 @@ var dgram = require('dgram');
 
 console.log("Hello World!");
 
-//var client = new NanoleafHttpClient('192.168.0.10', 'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9');
+var client = new NanoleafHttpClient('192.168.0.10', 'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9');
 
-let client = new NanoleafHttpClient('192.168.0.10', 'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9').getRequest('state');
+function getState() {
+  client.getRequest('state/on');
+}
 
-//var r = test.NanoleafHttpClient('192.168.0.10', 'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9');
-// function getState() {
-//   client.get('state');
-// }
+function turnOn() {
+  client.putRequest('state', JSON.stringify({on: { value: true } }, null, 2));
+}
 
 //getState();
-
+//turnOn();
 
 function broadcastSsdp(socket) {
     var query = Buffer.from(

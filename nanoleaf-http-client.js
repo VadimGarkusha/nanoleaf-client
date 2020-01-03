@@ -32,12 +32,31 @@ class NanoleafHttpClient {
      * @returns {void}
      */
     getRequest(url) {
-        // console.log(`Path: ${this._host}`);
-        // console.log(`Url: ${url}`);
-        request.get(this._host + url, function(error, response, body) {
-            console.error('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            console.log('body:', body); // Print the HTML for the Google homepage.
+        console.log(`Path: ${this._host}`);
+        console.log(`Url: ${url}`);
+
+        request.get(this._host + url, (error, response, body) => {
+            console.error('error:', error);
+            console.log('statusCode:', response && response.statusCode); 
+            console.log('body:', body);
+        });
+    }
+
+    /**
+     * Send put request
+     * 
+     * @param {string} url Resource path
+     * @param {*} data Body
+     * @returns {void}
+     */
+    putRequest(url, data) {
+        console.log(`Path: ${this._host}${url}`);
+        console.log(`Body: ${data}`);
+
+        request.put(this._host + url, {body: data}, (error, response, body) => {
+            console.error('error:', error);
+            console.log('statusCode:', response && response.statusCode); 
+            console.log('body:', body);
         });
     }
 }
