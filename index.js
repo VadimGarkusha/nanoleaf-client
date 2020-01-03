@@ -9,6 +9,7 @@ const client = new NanoleafClient(
 );
 const httpClient = new NanoleafHttpClient('192.168.0.21');
 
+//httpClient.addUserRequest();
 //client.getPowerStatus();
 client.turnOn();
 //client.getInfo();
