@@ -1,22 +1,17 @@
 import c from './const.js';
+import NanoleafClient from './src/nanoleaf-client.js';
 import NanoleafHttpClient from './src/nanoleaf-http-client.js';
 import dgram from 'dgram';
 
-var client = new NanoleafHttpClient(
-  '192.168.0.10',
-  'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9'
+const client = new NanoleafClient(
+  '192.168.0.21',
+  's5rpY3tsHxq75I0jI4Z5aUsavcTxc9lZ'
 );
+const httpClient = new NanoleafHttpClient('192.168.0.21');
 
-function getState() {
-  client.getRequest('state/on');
-}
-
-function turnOn() {
-  client.putRequest('state', JSON.stringify({ on: { value: true } }, null, 2));
-}
-
-//getState();
-//turnOn();
+//client.getPowerStatus();
+client.turnOn();
+//client.getInfo();
 
 function broadcastSsdp(socket) {
   var query = Buffer.from(
@@ -52,4 +47,4 @@ function createSocket() {
   }, 3000);
 }
 
-createSocket();
+//createSocket();
