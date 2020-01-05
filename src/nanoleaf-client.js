@@ -1,5 +1,6 @@
 import axios from 'axios';
 import PowerStatus from './models/power-status.js';
+import Saturation from './models/saturation.js';
 import NanoleafHttpClient from './nanoleaf-http-client.js';
 
 class NanoleafClient {
@@ -36,14 +37,42 @@ class NanoleafClient {
   }
 
   /**
-   *
-   *
+   * Get and save token for http-client
    */
   async authorizeUser() {
+    // TODO: add save token after request
     const response = await this._client.postRequest('new/');
-    console.log(response.auth_token + 'token');
-    this._client._token = response.auth_token;
-    console.log(this._client, this._client._token);
+  }
+
+  /**
+   * Get current saturation
+   *
+   * @returns {Promise<Saturation>}
+   */
+  async getSaturation() {
+    return new Saturation(await this._client.getRequest('state/sat'));
+  }
+
+  /**
+   * Set saturation
+   *
+   * @param {Number} saturation
+   */
+  async setSaturation(saturation) {
+    await this._client.putRequest('state', {
+      sat: { value: saturation }
+    });
+  }
+
+  /**
+   * Set saturation
+   *
+   * @param {Number} saturationIncerement
+   */
+  async incrementSaturation(saturationIncerement) {
+    await this._client.putRequest('state', {
+      sat: { increment: saturationIncerement }
+    });
   }
 }
 
