@@ -3,11 +3,10 @@ import c from '../const.js';
 
 class NanoleafHttpClient {
   /**
-   *
    * @param {string} host Device local IP
    * @param {string} token Authorization token
    */
-  constructor(host, token = '') {
+  constructor(host, token) {
     this._token = token;
     this._host = new URL(
       `http://${host}:${c.NANOLEAF_PORT}/api/v1/${
@@ -33,7 +32,7 @@ class NanoleafHttpClient {
    * Send get request
    *
    * @param {string} url
-   * @returns {void}
+   * @returns {Promise<any>}
    */
   async getRequest(url = '') {
     console.log(`Path: ${this._host}`);
@@ -55,8 +54,8 @@ class NanoleafHttpClient {
    * Send put request
    *
    * @param {string} url Resource path
-   * @param {*} body Body
-   * @returns {void}
+   * @param {any} body Body
+   * @returns {Promise<any>}
    */
   async putRequest(url, body) {
     console.log(`Path: ${this._host}${url}`);
