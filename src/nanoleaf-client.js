@@ -30,6 +30,24 @@ class NanoleafClient {
   async turnOn() {
     return await this._client.putRequest('state', { on: { value: true } });
   }
+
+  /**
+   * @returns {string}
+   */
+  async addUserRequest() {
+    console.log(`Path: ${this._host}new/`);
+
+    return await axios
+      .post(`${this._host}new/`)
+      .then(response => {
+        console.log('statusCode:', response && response.status);
+        console.log('data:', response.data);
+        return response.data;
+      })
+      .catch(error => {
+        console.error('error:', error);
+      });
+  }
 }
 
 export default NanoleafClient;
