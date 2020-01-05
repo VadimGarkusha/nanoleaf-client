@@ -72,6 +72,29 @@ class NanoleafHttpClient {
         console.error('error:', error);
       });
   }
+
+  /**
+   * Send post request
+   *
+   * @param {string} url Resource path
+   * @param {any} body Body
+   * @returns {Promise<any>}
+   */
+  async postRequest(url) {
+    console.log(`Path: ${this._host}${url}`);
+    console.log(url);
+
+    return await axios
+      .post(this._host + url)
+      .then(response => {
+        console.log('statusCode:', response && response.status);
+        console.log('data:', response.data);
+        return response.data;
+      })
+      .catch(error => {
+        console.error('error:', error);
+      });
+  }
 }
 
 export default NanoleafHttpClient;

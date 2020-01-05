@@ -1,20 +1,24 @@
+import axios from 'axios';
+import PowerStatus from './models/power-status.js';
 import NanoleafHttpClient from './nanoleaf-http-client.js';
 
 class NanoleafClient {
   /**
-   *
    * @param {string} host Device local IP
-   * @param {string} token Authorization token
+   * @param {string} [token=''] Authorization token
    */
   constructor(host, token = '') {
     this._client = new NanoleafHttpClient(host, token);
   }
 
   /**
+   * Gets power status of the device (on/off)
    *
+   * @returns {Promise<PowerStatus>}
    */
   async getPowerStatus() {
-    return await this._client.getRequest('state/on');
+    const response = await this._client.getRequest('state/on');
+    return new PowerStatus(response);
   }
 
   /**
@@ -25,28 +29,21 @@ class NanoleafClient {
   }
 
   /**
-   *
+   *  Turns the device on
    */
   async turnOn() {
     return await this._client.putRequest('state', { on: { value: true } });
   }
 
   /**
-   * @returns {string}
+   *
+   *
    */
-  async addUserRequest() {
-    console.log(`Path: ${this._host}new/`);
-
-    return await axios
-      .post(`${this._host}new/`)
-      .then(response => {
-        console.log('statusCode:', response && response.status);
-        console.log('data:', response.data);
-        return response.data;
-      })
-      .catch(error => {
-        console.error('error:', error);
-      });
+  async authorizeUser() {
+    const response = await this._client.postRequest('new/');
+    console.log(response.auth_token + 'token');
+    this._client._token = response.auth_token;
+    console.log(this._client, this._client._token);
   }
 }
 
