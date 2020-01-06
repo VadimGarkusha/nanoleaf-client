@@ -1,18 +1,25 @@
 import NanoleafClient from './src/nanoleaf-client.js';
 import ServiceDiscovery from './src/service-discovery.js';
+import NanoleafDevice from './src/models/nanoleaf-device.js';
 
 var ip = '192.168.0.10';
 var token = 'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9';
-const discovery = new ServiceDiscovery();
 
-discovery.createSocket().then(response => {
-  console.log('RESPONSE: ', response);
-});
+//  Service Discovery
 
-const client = new NanoleafClient(
-  ip, token
-);
-//const httpClient = new NanoleafHttpClient(ip);
+// let client;
+// const discovery = new ServiceDiscovery();
+// let promise = discovery.discoverNanoleaf();
+
+// promise.then(response => {
+//   client = new NanoleafClient(
+//     response[0].location.hostname, token
+//   );
+
+//   client.turnOff();
+// });
+
+const client = new NanoleafClient(ip, token);
 
 //httpClient.addUserRequest();
 
@@ -21,7 +28,7 @@ const client = new NanoleafClient(
 
 //client.getPowerStatus();
 //client.turnOn();
-//client.turnOff();
+client.turnOff();
 
 // Brightness
 
