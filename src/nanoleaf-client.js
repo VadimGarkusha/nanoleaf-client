@@ -16,7 +16,7 @@ class NanoleafClient {
   /**
    * Gets power status of the device (on/off)
    *
-   * @returns {Promise<PowerStatus>}
+   * @returns {PowerStatus}
    */
   async getPowerStatus() {
     const response = await this._client.getRequest('state/on');
@@ -49,17 +49,18 @@ class NanoleafClient {
    * Get and save token for http-client
    */
   async authorizeUser() {
-    // TODO: add save token after request
     const response = await this._client.postRequest('new/');
   }
 
   /**
    * Get current saturation
    *
-   * @returns {Promise<Saturation>}
+   * @returns {Saturation}
    */
   async getSaturation() {
-    return new Saturation(await this._client.getRequest('state/sat'));
+    var response = await this._client.getRequest('state/sat');
+
+    return new Saturation(response);
   }
 
   /**
@@ -86,6 +87,8 @@ class NanoleafClient {
 
   /**
    * Get brightness
+   * 
+   * @returns {Brightness}
    */
   async getBrightness() {
     var response = await this._client.getRequest('state/brightness');
@@ -95,6 +98,8 @@ class NanoleafClient {
 
   /**
    * Set Brightness
+   * 
+   * @param {number} value
    */
   async setBrightness(value) {
     await this._client.putRequest('state', {
@@ -104,6 +109,8 @@ class NanoleafClient {
 
   /**
    * Increase Brightness
+   * 
+   * @param {number} value
    */
   async increaseBrightness(value) {
     await this._client.putRequest('state', {
@@ -113,6 +120,9 @@ class NanoleafClient {
 
   /**
    * Set Brightness with duration
+   * 
+   * @param {number} value
+   * @param {number} duration
    */
   async setBrightness(value, duration) {
     await this._client.putRequest('state', {
@@ -123,8 +133,10 @@ class NanoleafClient {
     });
   }
 
-    /**
+  /**
    * Get hue
+   * 
+   * @returns {Hue}
    */
   async getHue() {
     var response = await this._client.getRequest('state/hue');
@@ -134,6 +146,8 @@ class NanoleafClient {
 
   /**
    * Set hue
+   * 
+   * @param {number} value
    */
   async setHue(value) {
     await this._client.putRequest('state', {
@@ -143,6 +157,8 @@ class NanoleafClient {
 
   /**
    * Increase hue
+   * 
+   * @param {number} value
    */
   async increaseHue(value) {
     await this._client.putRequest('state', {
