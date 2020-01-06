@@ -3,16 +3,35 @@ import NanoleafClient from './src/nanoleaf-client.js';
 import NanoleafHttpClient from './src/nanoleaf-http-client.js';
 import dgram from 'dgram';
 
+var ip = '192.168.0.10';
+var token = 'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9';
+
 const client = new NanoleafClient(
-  '192.168.0.21',
-  's5rpY3tsHxq75I0jI4Z5aUsavcTxc9lZ'
+  ip, token
 );
-const httpClient = new NanoleafHttpClient('192.168.0.21');
+//const httpClient = new NanoleafHttpClient(ip);
 
 //httpClient.addUserRequest();
+
+
+// Power
+
 //client.getPowerStatus();
-client.turnOn();
-//client.getInfo();
+//client.turnOn();
+//client.turnOff();
+
+// Brightness
+
+//client.increaseBrightness(25, 5);
+// var response = client.getBrightness();
+// console.log(response);
+
+// Hue
+
+//var response = client.getHue();
+//var response = client.setHue(0);
+//console.log(response);
+
 
 function broadcastSsdp(socket) {
   var query = Buffer.from(

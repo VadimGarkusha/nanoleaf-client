@@ -1,7 +1,8 @@
-import axios from 'axios';
 import PowerStatus from './models/power-status.js';
 import Saturation from './models/saturation.js';
 import NanoleafHttpClient from './nanoleaf-http-client.js';
+import Brightness from './models/brightness.js';
+import Hue from './models/hue.js';
 
 class NanoleafClient {
   /**
@@ -34,6 +35,14 @@ class NanoleafClient {
    */
   async turnOn() {
     return await this._client.putRequest('state', { on: { value: true } });
+  }
+
+  /**
+   * Turn off device
+   */
+
+  async turnOff() {
+    return await this._client.putRequest('state', { on: { value: false } });
   }
 
   /**
@@ -72,6 +81,72 @@ class NanoleafClient {
   async incrementSaturation(saturationIncerement) {
     await this._client.putRequest('state', {
       sat: { increment: saturationIncerement }
+    });
+  }
+
+  /**
+   * Get brightness
+   */
+  async getBrightness() {
+    var response = await this._client.getRequest('state/brightness');
+
+    return new Brightness(response);
+  }
+
+  /**
+   * Set Brightness
+   */
+  async setBrightness(value) {
+    await this._client.putRequest('state', {
+      brightness: { value: value }
+    });
+  }
+
+  /**
+   * Increase Brightness
+   */
+  async increaseBrightness(value) {
+    await this._client.putRequest('state', {
+      brightness: { increment: value }
+    });
+  }
+
+  /**
+   * Set Brightness with duration
+   */
+  async setBrightness(value, duration) {
+    await this._client.putRequest('state', {
+      brightness: {
+        value: value,
+        duration: duration
+      }
+    });
+  }
+
+    /**
+   * Get hue
+   */
+  async getHue() {
+    var response = await this._client.getRequest('state/hue');
+
+    return new Hue(response);
+  }
+
+  /**
+   * Set hue
+   */
+  async setHue(value) {
+    await this._client.putRequest('state', {
+      hue: { value: value }
+    });
+  }
+
+  /**
+   * Increase hue
+   */
+  async increaseHue(value) {
+    await this._client.putRequest('state', {
+      hue: { increment: value }
     });
   }
 }
