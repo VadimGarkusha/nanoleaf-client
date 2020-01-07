@@ -55,12 +55,18 @@ const client = new NanoleafClient(ip, token);
 
 // Color Mode
 
-// let response = client.getColorMode();
-// console.log(response);
+// client.getColorMode();
 
 // Effects
 
-let response = client.getEffect();
-client.setEffect('Meteor Shower').then(r => {
-  client.getEffect();
-});
+// client.setEffect('Meteor Shower').then(r => {
+//   client.getEffect();
+// });
+
+// client.getEffectList();
+
+// Global Orientation
+
+// client.setGlobalOrientation(100).then(() => {
+//   client.getGlobalOrientation();
+// });

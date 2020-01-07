@@ -4,6 +4,7 @@ import NanoleafHttpClient from './nanoleaf-http-client.js';
 import Brightness from './models/brightness.js';
 import Hue from './models/hue.js';
 import ColorTemperature from './models/color-temperature.js';
+import GlobalOrientation from './models/global-orientation.js';
 
 class NanoleafClient {
   /**
@@ -242,6 +243,30 @@ class NanoleafClient {
     const response = await this._client.getRequest('effects/effectsList');
 
     return response;
+  }
+
+  /**
+   * Get Global Orientation
+   *
+   * @returns {GlobalOrientation}
+   */
+  async getGlobalOrientation() {
+    const response = await this._client.getRequest(
+      'panelLayout/globalOrientation'
+    );
+
+    return new GlobalOrientation(response);
+  }
+
+  /**
+   * Set Global Orientation
+   *
+   * @param {number} value
+   */
+  async setGlobalOrientation(value) {
+    await this._client.putRequest('panelLayout', {
+      globalOrientation: { value }
+    });
   }
 }
 
