@@ -234,7 +234,7 @@ class NanoleafClient {
   }
 
   /**
-   * Get List of Effect
+   * Get List of available Effects
    *
    * @returns {string[]}
    */
