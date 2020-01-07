@@ -23,12 +23,11 @@ const client = new NanoleafClient(ip, token);
 
 //httpClient.addUserRequest();
 
-
 // Power
 
 //client.getPowerStatus();
 //client.turnOn();
-client.turnOff();
+//client.turnOff();
 
 // Brightness
 
@@ -41,3 +40,27 @@ client.turnOff();
 //var response = client.getHue();
 //var response = client.setHue(0);
 //console.log(response);
+
+// Color Temperature
+
+// let response = client.getColorTemperature();
+// console.log(response);
+// client.setColorTemperature(1200).then(() => {
+//   console.log(client.getColorTemperature());
+
+//   client.incrementColorTemperature(1200).then(() => {
+//     console.log(client.getColorTemperature());
+//   });
+// });
+
+// Color Mode
+
+// let response = client.getColorMode();
+// console.log(response);
+
+// Effects
+
+let response = client.getEffect();
+client.setEffect('Meteor Shower').then(r => {
+  client.getEffect();
+});
