@@ -232,6 +232,17 @@ class NanoleafClient {
       select: { value }
     });
   }
+
+  /**
+   * Get List of Effect
+   *
+   * @returns {string[]}
+   */
+  async getEffectList() {
+    const response = await this._client.getRequest('effects/effectsList');
+
+    return response;
+  }
 }
 
 export default NanoleafClient;
