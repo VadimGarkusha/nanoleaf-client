@@ -67,22 +67,22 @@ class NanoleafClient {
   /**
    * Set saturation
    *
-   * @param {Number} saturation
+   * @param {Number} value
    */
-  async setSaturation(saturation) {
+  async setSaturation(value) {
     await this._client.putRequest('state', {
-      sat: { value: saturation }
+      sat: { value }
     });
   }
 
   /**
    * Increase saturation
    *
-   * @param {Number} saturationIncerement
+   * @param {Number} increment
    */
-  async incrementSaturation(saturationIncerement) {
+  async incrementSaturation(increment) {
     await this._client.putRequest('state', {
-      sat: { increment: saturationIncerement }
+      sat: { increment }
     });
   }
 
@@ -111,11 +111,11 @@ class NanoleafClient {
   /**
    * Increase Brightness
    *
-   * @param {number} value
+   * @param {number} increment
    */
-  async increaseBrightness(value) {
+  async increaseBrightness(increment) {
     await this._client.putRequest('state', {
-      brightness: { increment: value }
+      brightness: { increment }
     });
   }
 
@@ -128,8 +128,8 @@ class NanoleafClient {
   async setBrightness(value, duration) {
     await this._client.putRequest('state', {
       brightness: {
-        value: value,
-        duration: duration
+        value,
+        duration
       }
     });
   }
@@ -159,11 +159,11 @@ class NanoleafClient {
   /**
    * Increase hue
    *
-   * @param {number} value
+   * @param {number} increment
    */
-  async increaseHue(value) {
+  async increaseHue(increment) {
     await this._client.putRequest('state', {
-      hue: { increment: value }
+      hue: { increment }
     });
   }
 
@@ -192,11 +192,11 @@ class NanoleafClient {
   /**
    * Increase Color Temperature
    *
-   * @param {Number} colorTemperatureIncrement
+   * @param {Number} increment
    */
-  async incrementColorTemperature(colorTemperatureIncrement) {
+  async incrementColorTemperature(increment) {
     await this._client.putRequest('state', {
-      ct: { increment: colorTemperatureIncrement }
+      ct: { increment }
     });
   }
 
