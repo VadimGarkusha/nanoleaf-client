@@ -1,6 +1,9 @@
 import axios from 'axios';
 import c from '../const.js';
 
+/**
+ * Class for making http calls to Nanoleaf Device
+ */
 class NanoleafHttpClient {
   /**
    * @param {string} host Device local IP
@@ -14,8 +17,6 @@ class NanoleafHttpClient {
       }`
     );
   }
-
-  //private methods start with underscore
 
   /**
    * Authorize requests
@@ -35,18 +36,13 @@ class NanoleafHttpClient {
    * @returns {Promise<any>}
    */
   async getRequest(url = '') {
-    console.log(`Path: ${this._host}`);
-    console.log(`Url: ${url}`);
-
     return await axios
       .get(this._host + url)
       .then(response => {
-        console.log('statusCode:', response && response.status);
-        console.log('data:', response.data);
         return response.data;
       })
       .catch(error => {
-        console.error('error:', error);
+        return this._handleErrorResponse(error.response.status);
       });
   }
 
@@ -58,18 +54,13 @@ class NanoleafHttpClient {
    * @returns {Promise<any>}
    */
   async putRequest(url, body) {
-    console.log(`Path: ${this._host}${url}`);
-    console.log(`Request Body: ${body}`);
-
     return await axios
       .put(this._host + url, body)
       .then(response => {
-        console.log('statusCode:', response && response.status);
-        console.log('data:', response.data);
         return response.data;
       })
       .catch(error => {
-        console.error('error:', error);
+        return this._handleErrorResponse(error.response.status);
       });
   }
 
@@ -81,20 +72,47 @@ class NanoleafHttpClient {
    * @returns {Promise<any>}
    */
   async postRequest(url) {
-    console.log(`Path: ${this._host}${url}`);
-    console.log(url);
-
     return await axios
       .post(this._host + url)
       .then(response => {
-        console.log('statusCode:', response && response.status);
-        console.log('data:', response.data);
         return response.data;
       })
       .catch(error => {
-        console.error('error:', error);
+        return this._handleErrorResponse(error.response.status);
       });
   }
+
+  /**
+   * Handle error responses
+   * 
+   * @param {number} errorCode http error code
+   */
+  _handleErrorResponse(statusCode) {
+    let message;
+    switch(statusCode) {
+      case 400:
+        message = 'Bad request'
+        break;
+      case 401:
+        message = 'Request was not authorized';
+        break;
+      case 403:
+        message = 'Request is forbidden';
+        break;
+      case 404:
+        message = 'Resource not found'
+        break;
+      case 422:
+        message = 'Unprocessable entity';
+        break;
+      case 500:
+        message = 'Internal server error';
+        break;
+    }
+
+    return { statusCode, message };
+  }
+
 }
 
 export default NanoleafHttpClient;

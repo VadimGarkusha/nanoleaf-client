@@ -2,6 +2,9 @@ import NanoleafDevice from './models/nanoleaf-device.js';
 import dgram from 'dgram';
 import c from './../const.js';
 
+/**
+ * Class for discovering nanoleaf devices over the Wi-Fi network
+ */
 class ServiceDiscovery {
   _broadcastSsdp(socket) {
     var query = Buffer.from(

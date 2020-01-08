@@ -6,6 +6,9 @@ import Hue from './models/hue.js';
 import ColorTemperature from './models/color-temperature.js';
 import GlobalOrientation from './models/global-orientation.js';
 
+/**
+ * Http client for Nanoleaf Aurora devices
+ */
 class NanoleafClient {
   /**
    * @param {string} host Device local IP
@@ -36,7 +39,11 @@ class NanoleafClient {
    *  Turn on device
    */
   async turnOn() {
-    return await this._client.putRequest('state', { on: { value: true } });
+    var response = await this._client.putRequest('state', { on: { value: true } });
+
+    console.log('RES', response)
+
+    return response;
   }
 
   /**
@@ -48,10 +55,15 @@ class NanoleafClient {
   }
 
   /**
-   * Get and save token for http-client
+   * Get authorization token
+   * 
+   * @returns {string} Auth token
    */
-  async authorizeUser() {
-    const response = await this._client.postRequest('new/');
+  async authorize() {
+    const response = await this._client.postRequest('new');
+    this._client.authorize(response.auth_token);
+
+    return response.auth_token;
   }
 
   /**

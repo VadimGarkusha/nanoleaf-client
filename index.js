@@ -20,13 +20,17 @@ var token = 'qEQ8ZLcPuOVesarDXIW6eGQQd1Hhn1d9';
 // });
 
 const client = new NanoleafClient(ip, token);
-
+// client.authorize();
 //httpClient.addUserRequest();
 
 // Power
 
 //client.getPowerStatus();
-//client.turnOn();
+client.turnOn().then(res => {
+    console.log('RESPONSE', res);
+}, error => {
+    console.log('ERROR', error)
+});
 //client.turnOff();
 
 // Brightness
