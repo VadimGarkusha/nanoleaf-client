@@ -1,10 +1,15 @@
 {
   "name": "nanoleaf-client",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/nanoleaf-client.js",
   "scripts": {
-    "test": "node --experimental-modules index.js"
+    "test": "node --experimental-modules index.js",
+    "clean": "rimraf lib dist",
+    "build:commonjs": "babel ./src -d ./lib",
+    "build:umd": "cross-env FILE_NAME=nanoleaf-client webpack",
+    "build:umd:min": "cross-env NODE_ENV=production npm run build:umd",
+    "build": "npm run clean && npm run build:commonjs && npm run build:umd && npm run build:umd:min"
   },
   "repository": {
     "type": "git",
@@ -19,5 +24,14 @@
   "homepage": "https://github.com/VadimGarkusha/nanoleaf-client#readme",
   "dependencies": {
     "axios": "^0.19.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "cross-env": "^6.0.3",
+    "rimraf": "^3.0.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   }
 }
