@@ -1,5 +1,5 @@
 import axios from 'axios';
-import c from '../const.js';
+import c from './const.js';
 
 /**
  * Class for making http calls to Nanoleaf Device
@@ -84,14 +84,14 @@ class NanoleafHttpClient {
 
   /**
    * Handle error responses
-   * 
+   *
    * @param {number} errorCode http error code
    */
   _handleErrorResponse(statusCode) {
     let message;
-    switch(statusCode) {
+    switch (statusCode) {
       case 400:
-        message = 'Bad request'
+        message = 'Bad request';
         break;
       case 401:
         message = 'Request was not authorized';
@@ -100,7 +100,7 @@ class NanoleafHttpClient {
         message = 'Request is forbidden';
         break;
       case 404:
-        message = 'Resource not found'
+        message = 'Resource not found';
         break;
       case 422:
         message = 'Unprocessable entity';
@@ -112,7 +112,6 @@ class NanoleafHttpClient {
 
     return { statusCode, message };
   }
-
 }
 
 export default NanoleafHttpClient;

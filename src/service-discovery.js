@@ -1,6 +1,6 @@
 import NanoleafDevice from './models/nanoleaf-device.js';
 import dgram from 'dgram';
-import c from './../const.js';
+import c from './const.js';
 
 /**
  * Class for discovering nanoleaf devices over the Wi-Fi network

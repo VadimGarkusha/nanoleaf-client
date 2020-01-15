@@ -39,9 +39,9 @@ class NanoleafClient {
    *  Turn on device
    */
   async turnOn() {
-    var response = await this._client.putRequest('state', { on: { value: true } });
-
-    console.log('RES', response)
+    var response = await this._client.putRequest('state', {
+      on: { value: true }
+    });
 
     return response;
   }
@@ -56,7 +56,7 @@ class NanoleafClient {
 
   /**
    * Get authorization token
-   * 
+   *
    * @returns {string} Auth token
    */
   async authorize() {
