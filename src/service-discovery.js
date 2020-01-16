@@ -1,4 +1,4 @@
-import NanoleafDevice from './models/nanoleaf-device.js';
+import { NanoleafDevice } from './models/index.js';
 import dgram from 'dgram';
 import c from './const.js';
 

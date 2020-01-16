@@ -1,10 +1,12 @@
-import PowerStatus from './models/power-status.js';
-import Saturation from './models/saturation.js';
+import {
+  Brightness,
+  ColorTemperature,
+  GlobalOrientation,
+  Hue,
+  PowerStatus,
+  Saturation
+} from './models/index.js';
 import NanoleafHttpClient from './nanoleaf-http-client.js';
-import Brightness from './models/brightness.js';
-import Hue from './models/hue.js';
-import ColorTemperature from './models/color-temperature.js';
-import GlobalOrientation from './models/global-orientation.js';
 
 /**
  * Http client for Nanoleaf Aurora devices
