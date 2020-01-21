@@ -6,6 +6,11 @@ import c from './const.js';
  * Class for discovering nanoleaf devices over the Wi-Fi network
  */
 class ServiceDiscovery {
+  /**
+   * Send ssdp message via socket
+   * 
+   * @param {dgram.Socket} socket 
+   */
   _broadcastSsdp(socket) {
     var query = Buffer.from(
       'M-SEARCH * HTTP/1.1\r\n' +
@@ -19,6 +24,8 @@ class ServiceDiscovery {
   }
 
   /**
+   * Make the search to discover nanoleaf devices
+   * 
    * @returns {Promise<NanoleafDevice[]>} array of discovered devices
    */
   discoverNanoleaf() {

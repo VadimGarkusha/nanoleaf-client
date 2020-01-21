@@ -1,5 +1,6 @@
 import axios from 'axios';
 import c from './const.js';
+import { HttpError, HttpResponse } from './models/index.js';
 
 /**
  * Class for making http calls to Nanoleaf Device
@@ -33,15 +34,13 @@ class NanoleafHttpClient {
    * Send get request
    *
    * @param {string} url
-   * @returns {Promise<any>}
-   */
-  async getRequest(url = '') {
-    return await axios
-      .get(this._host + url)
+   * @returns {Promise<AxiosResponse<any>>}
+   */ 
+  getRequest(url = '') {
+    return axios.get(this._host + url)
       .then(response => {
         return response.data;
-      })
-      .catch(error => {
+      }).catch(error => {
         return this._handleErrorResponse(error.response.status);
       });
   }
@@ -51,15 +50,13 @@ class NanoleafHttpClient {
    *
    * @param {string} url Resource path
    * @param {any} body Body
-   * @returns {Promise<any>}
+   * @returns {Promise<AxiosResponse<any>>}
    */
-  async putRequest(url, body) {
-    return await axios
-      .put(this._host + url, body)
+  putRequest(url, body) {
+    return axios.put(this._host + url, body)
       .then(response => {
-        return response.data;
-      })
-      .catch(error => {
+        return this._handleSuccessResponse(response);
+      }).catch(error => {
         return this._handleErrorResponse(error.response.status);
       });
   }
@@ -69,15 +66,13 @@ class NanoleafHttpClient {
    *
    * @param {string} url Resource path
    * @param {any} body Body
-   * @returns {Promise<any>}
+   * @returns {Promise<AxiosResponse<any>>}
    */
-  async postRequest(url) {
-    return await axios
-      .post(this._host + url)
+  postRequest(url) {
+    return axios.post(this._host + url)
       .then(response => {
-        return response.data;
-      })
-      .catch(error => {
+        return this._handleSuccessResponse(response);
+      }).catch(error => {
         return this._handleErrorResponse(error.response.status);
       });
   }
@@ -86,6 +81,7 @@ class NanoleafHttpClient {
    * Handle error responses
    *
    * @param {number} errorCode http error code
+   * @returns {HttpError}
    */
   _handleErrorResponse(statusCode) {
     let message;
@@ -110,7 +106,17 @@ class NanoleafHttpClient {
         break;
     }
 
-    return { statusCode, message };
+    return new HttpError(statusCode, message);
+  }
+
+  /**
+   * Handle success responses
+   * 
+   * @param {any} response 
+   * @returns {HttpResponse}
+   */
+  _handleSuccessResponse(response) {
+    return new HttpResponse(response.status, response.statusText);
   }
 }
 
