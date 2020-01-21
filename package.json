@@ -2,7 +2,7 @@
   "name": "nanoleaf-client",
   "version": "0.1.0",
   "description": "",
-  "main": "lib/nanoleaf-client.js",
+  "main": "src/nanoleaf-client.js",
   "scripts": {
     "test": "node --experimental-modules index.js"
   },
