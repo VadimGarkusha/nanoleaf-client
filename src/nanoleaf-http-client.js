@@ -93,24 +93,24 @@ class NanoleafHttpClient {
   _handleErrorResponse(statusCode) {
     let message;
     switch (statusCode) {
-      case 400:
-        message = 'Bad request';
-        break;
-      case 401:
-        message = 'Request was not authorized';
-        break;
-      case 403:
-        message = 'Request is forbidden';
-        break;
-      case 404:
-        message = 'Resource not found';
-        break;
-      case 422:
-        message = 'Unprocessable entity';
-        break;
-      case 500:
-        message = 'Internal server error';
-        break;
+    case 400:
+      message = 'Bad request';
+      break;
+    case 401:
+      message = 'Request was not authorized';
+      break;
+    case 403:
+      message = 'Request is forbidden';
+      break;
+    case 404:
+      message = 'Resource not found';
+      break;
+    case 422:
+      message = 'Unprocessable entity';
+      break;
+    case 500:
+      message = 'Internal server error';
+      break;
     }
 
     return new HttpError(statusCode, message);

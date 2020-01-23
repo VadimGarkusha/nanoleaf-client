@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/nanoleaf-client.js",
   "scripts": {
-    "test": "node --experimental-modules index.js"
+    "test": "node --experimental-modules test.js",
+    "lint": "eslint --fix src/**"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,8 @@
   "homepage": "https://github.com/VadimGarkusha/nanoleaf-client#readme",
   "dependencies": {
     "axios": "^0.19.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
   }
 }

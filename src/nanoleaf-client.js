@@ -6,7 +6,6 @@ import {
   PowerStatus,
   Saturation,
   HttpError,
-  HttpResponse,
   Info
 } from './models/index.js';
 import NanoleafHttpClient from './nanoleaf-http-client.js';
@@ -160,7 +159,7 @@ class NanoleafClient {
    * @param {number} duration
    * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
-  setBrightness(value, duration) {
+  setDurationBrightness(value, duration) {
     return this._client.putRequest('state', {
       brightness: {
         value,

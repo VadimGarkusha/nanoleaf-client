@@ -12,19 +12,19 @@
  * @property {object} state State
  */
 class Info {
-    constructor(obj) {
-        this.name = obj.name;
-        this.serialNo = obj.serialNo;
-        this.manufacturer = obj.manufacturer;
-        this.firmwareVersion = obj.firmwareVersion;
-        this.hardwareVersion = obj.hardwareVersion;
-        this.model = obj.model;
-        this.effects = obj.effects;
-        this.panelLayout = obj.panelLayout;
-        this.rhythm = obj.rhythm;
-        this.schedules = obj.schedules;
-        this.state = obj.state;
-      }
+  constructor(obj) {
+    this.name = obj.name;
+    this.serialNo = obj.serialNo;
+    this.manufacturer = obj.manufacturer;
+    this.firmwareVersion = obj.firmwareVersion;
+    this.hardwareVersion = obj.hardwareVersion;
+    this.model = obj.model;
+    this.effects = obj.effects;
+    this.panelLayout = obj.panelLayout;
+    this.rhythm = obj.rhythm;
+    this.schedules = obj.schedules;
+    this.state = obj.state;
   }
+}
   
 export default Info;

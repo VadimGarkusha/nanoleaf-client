@@ -3,10 +3,10 @@
  * @property {number} message Http error description
  */
 class HttpError {
-    constructor(status, message) {
-      this.status = status;
-      this.message = message;
-    }
+  constructor(status, message) {
+    this.status = status;
+    this.message = message;
   }
+}
   
 export default HttpError;

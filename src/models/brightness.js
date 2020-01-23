@@ -4,11 +4,11 @@
  * @property {number} max
  */
 class Brightness {
-    constructor(obj) {
-      this.value = obj.value;
-      this.min = obj.min;
-      this.max = obj.max;
-    }
+  constructor(obj) {
+    this.value = obj.value;
+    this.min = obj.min;
+    this.max = obj.max;
   }
+}
   
 export default Brightness;

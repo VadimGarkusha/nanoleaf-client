@@ -12,7 +12,7 @@ class ServiceDiscovery {
    * @param {dgram.Socket} socket 
    */
   _broadcastSsdp(socket) {
-    var query = Buffer.from(
+    var query = Buffer.from( // eslint-disable-line no-undef
       'M-SEARCH * HTTP/1.1\r\n' +
         `HOST: ${c.SSDP_DEFAULT_IP}:${c.SSDP_DEFAULT_PORT}\r\n` +
         'MAN: "ssdp:discover"\r\n' +
@@ -37,7 +37,7 @@ class ServiceDiscovery {
       self._broadcastSsdp(socket);
     });
 
-    socket.on('message', function(chunk, info) {
+    socket.on('message', function(chunk, info) { // eslint-disable-line no-unused-vars
       var response = chunk
         .toString()
         .trim()
