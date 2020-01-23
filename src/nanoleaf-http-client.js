@@ -34,13 +34,16 @@ class NanoleafHttpClient {
    * Send get request
    *
    * @param {string} url
-   * @returns {Promise<AxiosResponse<any>>}
-   */ 
+   * @returns {Promise<object>|Promise<HttpError>}
+   */
+
   getRequest(url = '') {
-    return axios.get(this._host + url)
+    return axios
+      .get(this._host + url)
       .then(response => {
         return response.data;
-      }).catch(error => {
+      })
+      .catch(error => {
         return this._handleErrorResponse(error.response.status);
       });
   }
@@ -50,13 +53,15 @@ class NanoleafHttpClient {
    *
    * @param {string} url Resource path
    * @param {any} body Body
-   * @returns {Promise<AxiosResponse<any>>}
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   putRequest(url, body) {
-    return axios.put(this._host + url, body)
+    return axios
+      .put(this._host + url, body)
       .then(response => {
         return this._handleSuccessResponse(response);
-      }).catch(error => {
+      })
+      .catch(error => {
         return this._handleErrorResponse(error.response.status);
       });
   }
@@ -66,13 +71,15 @@ class NanoleafHttpClient {
    *
    * @param {string} url Resource path
    * @param {any} body Body
-   * @returns {Promise<AxiosResponse<any>>}
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   postRequest(url) {
-    return axios.post(this._host + url)
+    return axios
+      .post(this._host + url)
       .then(response => {
         return this._handleSuccessResponse(response);
-      }).catch(error => {
+      })
+      .catch(error => {
         return this._handleErrorResponse(error.response.status);
       });
   }
@@ -111,8 +118,8 @@ class NanoleafHttpClient {
 
   /**
    * Handle success responses
-   * 
-   * @param {any} response 
+   *
+   * @param {any} response
    * @returns {HttpResponse}
    */
   _handleSuccessResponse(response) {

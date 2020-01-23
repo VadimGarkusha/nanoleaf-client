@@ -29,25 +29,27 @@ class NanoleafClient {
    * @returns {Promise<PowerStatus>|Promise<HttpError>}
    */
   getPowerStatus() {
-    return this._client.getRequest('state/on')
-      .then(response => {
-        return (response instanceof HttpError) ? response : new PowerStatus(response);
-      });
+    return this._client.getRequest('state/on').then(response => {
+      return response instanceof HttpError
+        ? response
+        : new PowerStatus(response);
+    });
   }
 
   /**
-   * TODO: Add model
+   * Get device info
+   *
+   * @returns {Promise<Info>|Promise<HttpError>}
    */
   getInfo() {
-    return this._client.getRequest()
-      .then(response => {
-        return (response instanceof HttpError) ? response : new Info(response);
-      });
+    return this._client.getRequest().then(response => {
+      return response instanceof HttpError ? response : new Info(response);
+    });
   }
 
   /**
    *  Turn on device
-   * 
+   *
    * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   turnOn() {
@@ -58,7 +60,7 @@ class NanoleafClient {
 
   /**
    * Turn off device
-   * 
+   *
    * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   turnOff() {
@@ -68,29 +70,35 @@ class NanoleafClient {
   /**
    * Get authorization token
    *
-   * @returns {string} Auth token
+   * @returns {Promise<string>|Promise<HttpError>} Auth token
    */
   authorize() {
-    const response = this._client.postRequest('new');
-    this._client.authorize(response.auth_token);
+    return this._client.postRequest('new').then(response => {
+      const { auth_token } = response;
+      this._client.authorize(auth_token);
 
-    return response.auth_token;
+      return response instanceof HttpError ? response : auth_token;
+    });
   }
 
   /**
    * Get current saturation
    *
-   * @returns {Saturation}
+   * @returns {Promise<Saturation>|Promise<HttpError>}
    */
   getSaturation() {
-    const response = this._client.getRequest('state/sat');
-    return (response instanceof HttpError) ? response : new Saturation(response);
+    return this._client.getRequest('state/sat').then(response => {
+      return response instanceof HttpError
+        ? response
+        : new Saturation(response);
+    });
   }
 
   /**
    * Set saturation
    *
-   * @param {Number} value
+   * @param {Promise<HttpResponse>|Promise<HttpError>} value
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   setSaturation(value) {
     return this._client.putRequest('state', {
@@ -101,7 +109,8 @@ class NanoleafClient {
   /**
    * Increase saturation
    *
-   * @param {Number} increment
+   * @param {number} increment
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   incrementSaturation(increment) {
     return this._client.putRequest('state', {
@@ -117,13 +126,14 @@ class NanoleafClient {
   getBrightness() {
     const response = this._client.getRequest('state/brightness');
 
-    return (response instanceof HttpError) ? response : new Brightness(response);
+    return response instanceof HttpError ? response : new Brightness(response);
   }
 
   /**
    * Set Brightness
    *
    * @param {number} value
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   setBrightness(value) {
     return this._client.putRequest('state', {
@@ -135,6 +145,7 @@ class NanoleafClient {
    * Increase Brightness
    *
    * @param {number} increment
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   increaseBrightness(increment) {
     return this._client.putRequest('state', {
@@ -147,6 +158,7 @@ class NanoleafClient {
    *
    * @param {number} value
    * @param {number} duration
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   setBrightness(value, duration) {
     return this._client.putRequest('state', {
@@ -160,18 +172,19 @@ class NanoleafClient {
   /**
    * Get hue
    *
-   * @returns {Hue}
+   * @returns {Promise<Hue>|Promise<HttpError>}
    */
   getHue() {
-    const response = this._client.getRequest('state/hue');
-
-    return (response instanceof HttpError) ? response : new Hue(response);
+    return this._client.getRequest('state/hue').then(response => {
+      return response instanceof HttpError ? response : new Hue(response);
+    });
   }
 
   /**
    * Set hue
    *
    * @param {number} value
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   setHue(value) {
     return this._client.putRequest('state', {
@@ -183,6 +196,7 @@ class NanoleafClient {
    * Increase hue
    *
    * @param {number} increment
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   increaseHue(increment) {
     return this._client.putRequest('state', {
@@ -193,18 +207,21 @@ class NanoleafClient {
   /**
    * Get Color Temperature
    *
-   * @returns {ColorTemperature}
+   * @returns {Promise<ColorTemperature>|Promise<HttpError>}}
    */
   getColorTemperature() {
-    const response = this._client.getRequest('state/ct');
-
-    return (response instanceof HttpError) ? response : new ColorTemperature(response);
+    return this._client.getRequest('state/ct').then(response => {
+      return response instanceof HttpError
+        ? response
+        : new ColorTemperature(response);
+    });
   }
 
   /**
    * Set Color Temperature
    *
    * @param {number} value
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   setColorTemperature(value) {
     return this._client.putRequest('state', {
@@ -215,7 +232,8 @@ class NanoleafClient {
   /**
    * Increase Color Temperature
    *
-   * @param {Number} increment
+   * @param {number} increment
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   incrementColorTemperature(increment) {
     return this._client.putRequest('state', {
@@ -226,29 +244,26 @@ class NanoleafClient {
   /**
    * Get Color Mode
    *
-   * @returns {string}
+   * @returns {Promise<string>|Promise<HttpError>}
    */
   getColorMode() {
-    const response = this._client.getRequest('state/colorMode');
-
-    return response;
+    return this._client.getRequest('state/colorMode');
   }
 
   /**
    * Get Effect
    *
-   * @returns {string}
+   * @returns {Promise<string>|Promise<HttpError>}
    */
   getEffect() {
-    const response = this._client.getRequest('effects/select');
-
-    return response;
+    return this._client.getRequest('effects/select');
   }
 
   /**
    * Set Effect
    *
    * @param {number} value
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   setEffect(value) {
     return this._client.putRequest('effects', {
@@ -259,29 +274,32 @@ class NanoleafClient {
   /**
    * Get List of available Effects
    *
-   * @returns {string[]}
+   * @returns {Promise<string[]>|Promise<HttpError>}
    */
   getEffectList() {
-    const response = this._client.getRequest('effects/effectsList');
-
-    return response;
+    return this._client.getRequest('effects/effectsList');
   }
 
   /**
    * Get Global Orientation
    *
-   * @returns {GlobalOrientation}
+   * @returns {Promise<GlobalOrientation>|Promise<HttpError>}
    */
   getGlobalOrientation() {
-    const response = this._client.getRequest('panelLayout/globalOrientation');
-
-    return (response instanceof HttpError) ? response : new GlobalOrientation(response);
+    return this._client
+      .getRequest('panelLayout/globalOrientation')
+      .then(response => {
+        return response instanceof HttpError
+          ? response
+          : new GlobalOrientation(response);
+      });
   }
 
   /**
    * Set Global Orientation
    *
    * @param {number} value
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   setGlobalOrientation(value) {
     return this._client.putRequest('panelLayout', {
