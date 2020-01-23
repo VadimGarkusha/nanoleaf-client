@@ -1,7 +1,7 @@
 {
   "name": "nanoleaf-client",
   "version": "0.0.1",
-  "description": "",
+  "description": "Client app for Nanoleaf devices",
   "main": "src/nanoleaf-client.js",
   "scripts": {
     "test": "node --experimental-modules test.js",
