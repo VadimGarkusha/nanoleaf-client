@@ -120,12 +120,14 @@ class NanoleafClient {
   /**
    * Get brightness
    *
-   * @returns {Brightness}
+   * @returns {Promise<Brightness>|Promise<HttpError>}
    */
   getBrightness() {
-    const response = this._client.getRequest('state/brightness');
-
-    return response instanceof HttpError ? response : new Brightness(response);
+    return this._client.getRequest('state/brightness').then(response => {
+      return response instanceof HttpError
+        ? response
+        : new Brightness(response);
+    });
   }
 
   /**

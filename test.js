@@ -10,7 +10,79 @@ const client = new NanoleafClient(ip, token);
 // Power
 
 //client.getPowerStatus();
+client.getInfo().then(
+  res => {
+    console.log('RESPONSE', res);
+  },
+  error => {
+    console.log('ERROR', error);
+  }
+);
+
+client.getBrightness().then(
+  res => {
+    console.log('RESPONSE', res);
+  },
+  error => {
+    console.log('ERROR', error);
+  }
+);
+
+client.getColorMode().then(
+  res => {
+    console.log('RESPONSE', res);
+  },
+  error => {
+    console.log('ERROR', error);
+  }
+);
+
+client.getColorTemperature().then(
+  res => {
+    console.log('RESPONSE', res);
+  },
+  error => {
+    console.log('ERROR', error);
+  }
+);
+
+client.getEffect().then(
+  res => {
+    console.log('RESPONSE', res);
+  },
+  error => {
+    console.log('ERROR', error);
+  }
+);
+
 client.getEffectList().then(
+  res => {
+    console.log('RESPONSE', res);
+  },
+  error => {
+    console.log('ERROR', error);
+  }
+);
+
+client.getHue().then(
+  res => {
+    console.log('RESPONSE', res);
+  },
+  error => {
+    console.log('ERROR', error);
+  }
+);
+
+client.getGlobalOrientation().then(
+  res => {
+    console.log('RESPONSE', res);
+  },
+  error => {
+    console.log('ERROR', error);
+  }
+);
+
+client.getPowerStatus().then(
   res => {
     console.log('RESPONSE', res);
   },
