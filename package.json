@@ -16,6 +16,12 @@
   "bugs": {
     "url": "https://github.com/VadimGarkusha/nanoleaf-client/issues"
   },
+  "keywords": [
+    "nanoleaf",
+    "nanoleaf client",
+    "aurora client",
+    "nanoleaf aurora"
+  ],
   "type": "module",
   "homepage": "https://github.com/VadimGarkusha/nanoleaf-client#readme",
   "dependencies": {
