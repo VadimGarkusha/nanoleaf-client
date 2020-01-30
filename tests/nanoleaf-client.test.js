@@ -1,56 +1,66 @@
 import NanoleafClient from '../src/nanoleaf-client.js';
 import NanoleafHttpClient from '../src/nanoleaf-http-client.js';
+import { HttpError } from '../src/models/index.js';
 
 jest.mock('../src/nanoleaf-http-client.js');
-const mockedMethodImpl = jest.fn();
 
 const host = '';
 const token = '';
 
 beforeEach(() => {
-    NanoleafHttpClient.mockClear();
+  NanoleafHttpClient.mockClear();
 });
-
 
 describe('NanoleafClient constructor', () => {
-    it('Constructor accepts 2 arguments: host, token', () => {
-        expect(NanoleafHttpClient).not.toHaveBeenCalled();
-        const client = new NanoleafClient(host, token);
-        expect(NanoleafHttpClient).toHaveBeenCalledTimes(1);
-        expect(client._client).not.toBeNull();
-    });
+  it('Constructor accepts 2 arguments: host, token', () => {
+    expect(NanoleafHttpClient).not.toHaveBeenCalled();
+    const client = new NanoleafClient(host, token);
+    expect(NanoleafHttpClient).toHaveBeenCalledTimes(1);
+    expect(client._client).not.toBeNull();
+  });
 
-
-    it('Constructor accepts 1 argument: host', () => {
-        expect(NanoleafHttpClient).not.toHaveBeenCalled();
-        const client = new NanoleafClient(host);
-        expect(NanoleafHttpClient).toHaveBeenCalledTimes(1);
-        expect(client._client).not.toBeNull();
-    });
+  it('Constructor accepts 1 argument: host', () => {
+    expect(NanoleafHttpClient).not.toHaveBeenCalled();
+    const client = new NanoleafClient(host);
+    expect(NanoleafHttpClient).toHaveBeenCalledTimes(1);
+    expect(client._client).not.toBeNull();
+  });
 });
 
-// const mockHttpClientGetReturnSuccessfulResponse = (returnValue) => {
-//     NanoleafHttpClient.getRequest().mockResolvedValue();
-//     NanoleafHttpClient.mockImplementation(() => {
-//         // Replace the class-creation method with this mock version.
-//         return {
-//             getRequest: () => {
-//                 return new Promise((resolve, reject) ));
-//             } // Populate the method with a reference to a mock created with jest.fn().
-//         };
-//     });
-// };
+describe('NanoleafClient getPowerStatus', () => {
+  it('Returns Successful result', () => {
+    const client = new NanoleafClient(host);
+    const brightness = {
+      value: 10,
+      max: 100,
+      min: 0
+    };
 
-// describe('NanoleafClient getPowerStatus', () => {
-//     it('', () => {
-//         const client = new NanoleafClient(host);
-//         const brightness = {
-//             value: 10,
-//             max: 100,
-//             min: 0
-//         };
-//         mockHttpClientGetReturnSuccessfulResponse(brightness);
+    mockHttpClientGetRequest(client, brightness);
 
-//         return client.getBrightness().then(data => expect(data).toEqual(brightness));
-//     });
-// });
+    client.getBrightness('').then(result => {
+      expect(result.min).toBe(brightness.min);
+      expect(result.max).toBe(brightness.max);
+      expect(result.value).toBe(brightness.value);
+    });
+  });
+
+  it('Returns Error', () => {
+    const client = new NanoleafClient(host);
+    const error = new HttpError(500, 'Internal Server error');
+
+    mockHttpClientGetRequest(client, error);
+
+    client.getBrightness('').then(result => {
+      expect(result.message).toBe(error.message);
+      expect(result.status).toBe(error.status);
+    });
+  });
+});
+
+const mockHttpClientGetRequest = (client, returnValue) => {
+  const mockGetRequest = jest.fn();
+  client._client.getRequest = mockGetRequest;
+
+  mockGetRequest.mockReturnValue(Promise.resolve(returnValue));
+};
