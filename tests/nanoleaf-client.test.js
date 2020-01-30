@@ -38,7 +38,7 @@ describe('NanoleafClient getPowerStatus', () => {
 
     mockHttpClientGetRequest(client, brightness);
 
-    client.getBrightness('').then(result => {
+    client.getBrightness().then(result => {
       expect(result.min).toBe(brightness.min);
       expect(result.max).toBe(brightness.max);
       expect(result.value).toBe(brightness.value);
@@ -51,7 +51,42 @@ describe('NanoleafClient getPowerStatus', () => {
 
     mockHttpClientGetRequest(client, error);
 
-    client.getBrightness('').then(result => {
+    client.getBrightness().then(result => {
+      expect(result.message).toBe(error.message);
+      expect(result.status).toBe(error.status);
+    });
+  });
+});
+
+describe('NanoleafClient getInfo', () => {
+  it('Returns Successful result', () => {
+    const client = new NanoleafClient(host);
+    const info = {
+      name: 'Test name',
+      serialNo: '123',
+      manufacturer: 'Nanoleaf',
+      firmwareVersion: '12',
+      hardwareVersion: '13'
+    };
+
+    mockHttpClientGetRequest(client, info);
+
+    client.getInfo().then(result => {
+      expect(result.name).toBe(info.name);
+      expect(result.serialNo).toBe(info.serialNo);
+      expect(result.manufacturer).toBe(info.manufacturer);
+      expect(result.firmwareVersion).toBe(info.firmwareVersion);
+      expect(result.hardwareVersion).toBe(info.hardwareVersion);
+    });
+  });
+
+  it('Returns Error', () => {
+    const client = new NanoleafClient(host);
+    const error = new HttpError(500, 'Internal Server error');
+
+    mockHttpClientGetRequest(client, error);
+
+    client.getInfo().then(result => {
       expect(result.message).toBe(error.message);
       expect(result.status).toBe(error.status);
     });
