@@ -1,6 +1,6 @@
 /**
  * @property {number} status Http status code
- * @property {number} message Http status text
+ * @property {string} message Http status text
  * @property {object} data Response data
  */
 class HttpResponse {
@@ -9,5 +9,5 @@ class HttpResponse {
     this.message = message;
   }
 }
-  
+
 export default HttpResponse;
