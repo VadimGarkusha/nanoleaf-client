@@ -29,9 +29,7 @@ class NanoleafClient {
    */
   getPowerStatus() {
     return this._client.getRequest('state/on').then(response => {
-      return response instanceof HttpError
-        ? response
-        : new PowerStatus(response);
+      return response instanceof HttpError ? response : new PowerStatus(response);
     });
   }
 
@@ -87,9 +85,7 @@ class NanoleafClient {
    */
   getSaturation() {
     return this._client.getRequest('state/sat').then(response => {
-      return response instanceof HttpError
-        ? response
-        : new Saturation(response);
+      return response instanceof HttpError ? response : new Saturation(response);
     });
   }
 
@@ -124,9 +120,7 @@ class NanoleafClient {
    */
   getBrightness() {
     return this._client.getRequest('state/brightness').then(response => {
-      return response instanceof HttpError
-        ? response
-        : new Brightness(response);
+      return response instanceof HttpError ? response : new Brightness(response);
     });
   }
 
@@ -212,9 +206,7 @@ class NanoleafClient {
    */
   getColorTemperature() {
     return this._client.getRequest('state/ct').then(response => {
-      return response instanceof HttpError
-        ? response
-        : new ColorTemperature(response);
+      return response instanceof HttpError ? response : new ColorTemperature(response);
     });
   }
 
@@ -290,9 +282,7 @@ class NanoleafClient {
     return this._client
       .getRequest('panelLayout/globalOrientation')
       .then(response => {
-        return response instanceof HttpError
-          ? response
-          : new GlobalOrientation(response);
+        return response instanceof HttpError ? response : new GlobalOrientation(response);
       });
   }
 
