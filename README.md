@@ -9,7 +9,9 @@
   <h3 align="center">Nanoleaf Client</h3>
 </p>
 
-[![NPM version](https://img.shields.io/npm/v/nanoleaf-client)](https://www.npmjs.com/package/nanoleaf-client)  ![MIT License](https://img.shields.io/npm/l/nanoleaf-client)    ![Bundle size](https://img.shields.io/bundlephobia/min/nanoleaf-client)
+[![NPM version](https://img.shields.io/npm/v/nanoleaf-client)](https://www.npmjs.com/package/nanoleaf-client)
+[![MIT License](https://img.shields.io/npm/l/nanoleaf-client)](https://img.shields.io/npm/l/nanoleaf-client)
+[![Bundle size](https://img.shields.io/bundlephobia/min/nanoleaf-client)](https://img.shields.io/bundlephobia/min/nanoleaf-client)
 [![Build](https://img.shields.io/travis/com/VadimGarkusha/nanoleaf-client)](https://travis-ci.com/VadimGarkusha/nanoleaf-client)
 [![Coverage Status](https://coveralls.io/repos/github/VadimGarkusha/nanoleaf-client/badge.svg)](https://coveralls.io/github/VadimGarkusha/nanoleaf-client)
 
