@@ -41,7 +41,7 @@ In order to use the client you need to know your device IP on the network and a 
 
 Get device IP. NOTE: before running this command make sure the device is plugged in and is connected to the network. You can check it with phone app.
 
-Be careful with IPs! Sometimes, if you plug off the device or a router an IP address might change.
+Be careful with IPs! Sometimes, if you plug out the device or a router an IP address might change.
 
 ### Getting device IP
 ```javascript
