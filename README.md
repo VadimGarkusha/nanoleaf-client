@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a>
-    <img src="https://github.com/BullFrog13/Nanoleaf-Client/blob/master/nano1.png" alt="Logo" width="80" height="80">
+    <img src="./resources/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Nanoleaf Client</h3>
