@@ -36,7 +36,6 @@ class NanoleafHttpClient {
    * @param {string} url
    * @returns {Promise<object>|Promise<HttpError>}
    */
-
   getRequest(url = '') {
     return axios
       .get(this._host + url)
@@ -123,7 +122,11 @@ class NanoleafHttpClient {
    * @returns {HttpResponse}
    */
   _handleSuccessResponse(response) {
-    return new HttpResponse(response.status, response.statusText);
+    return new HttpResponse(
+      response.status,
+      response.statusText,
+      response.data
+    );
   }
 }
 
