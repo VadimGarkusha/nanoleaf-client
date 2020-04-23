@@ -152,13 +152,13 @@ describe('NanoleafClient authorize', () => {
   it('Returns Auth Token', () => {
     const client = new NanoleafClient(host);
     const response = {
-      auth_token: 'some token'
+      data: { auth_token: 'some token' },
     };
 
     mockHttpClientPostRequest(client, response);
 
-    return client.authorize().then(result => {
-      expect(result).toBe(response.auth_token);
+    return client.authorize().then((result) => {
+      expect(result).toBe(response.data.auth_token);
     });
   });
 

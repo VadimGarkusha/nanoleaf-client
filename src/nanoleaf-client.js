@@ -70,11 +70,13 @@ class NanoleafClient {
    * @returns {Promise<string>|Promise<HttpError>} Auth token
    */
   authorize() {
-    return this._client.postRequest('new').then(response => {
+    return this._client.postRequest('new').then((response) => {
+      if (response instanceof HttpError) return response;
+
       const { auth_token } = response.data;
       this._client.authorize(auth_token);
 
-      return response instanceof HttpError ? response : auth_token;
+      return auth_token;
     });
   }
 
