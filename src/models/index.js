@@ -19,5 +19,5 @@ export {
   NanoleafDevice,
   PowerStatus,
   Saturation,
-  Info
+  Info,
 };

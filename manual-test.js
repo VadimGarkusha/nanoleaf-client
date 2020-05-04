@@ -1,15 +1,16 @@
 import NanoleafClient from './src/nanoleaf-client.js';
 
-var ip = '192.168.0.21';
-var token = 's5rpY3tsHxq75I0jI4Z5aUsavcTxc9lZ';
+var ip = '192.168.0.10';
+var token = 'TkBrfZYlQ9CthkemgjdXoigFGdHBj2e6';
 
 const client = new NanoleafClient(ip, token);
 // client.authorize();
-//httpClient.addUserRequest();
+// httpClient.addUserRequest();
 
 // Power
 
-//client.getPowerStatus();
+// client.getPowerStatus();
+
 client.getInfo().then(
   res => {
     console.log('RESPONSE', res);
@@ -90,3 +91,27 @@ client.getPowerStatus().then(
     console.log('ERROR', error);
   }
 );
+
+client.setHsvColor(233, 77, 29).then(res => {
+  console.log('RES', res);
+}, err => {
+  console.log('ERROR', err);
+});
+
+client.setHslColor(233, 62.6, 17.83).then(res => {
+  console.log('RES', res);
+}, err => {
+  console.log('ERROR', err);
+});
+
+client.setHexColor('#11184a').then(res => {
+  console.log('RES', res);
+}, err => {
+  console.log('ERROR', err);
+});
+
+client.setRgbColor(17.01, 23.65, 73.95).then(res => {
+  console.log('RES', res);
+}, err => {
+  console.log('ERROR', err);
+});

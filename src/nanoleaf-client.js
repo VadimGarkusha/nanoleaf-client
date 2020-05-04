@@ -6,9 +6,10 @@ import {
   PowerStatus,
   Saturation,
   HttpError,
-  Info
+  Info,
 } from './models/index.js';
 import NanoleafHttpClient from './nanoleaf-http-client.js';
+import convert from 'color-convert';
 
 /**
  * Http client for Nanoleaf Aurora devices
@@ -298,6 +299,74 @@ class NanoleafClient {
     return this._client.putRequest('panelLayout', {
       globalOrientation: { value }
     });
+  }
+
+  /**
+   * Set hsv color
+   * 
+   * @param {number} h 
+   * @param {number} s 
+   * @param {number} v
+   * 
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
+   */
+  setHsvColor(h, s, v) {
+    const huePromise = this.setHue(h);
+    const satPromise = this.setSaturation(s);
+    const brightnessPromise = this.setBrightness(v);
+
+    return Promise.all([huePromise, satPromise, brightnessPromise]).then(res => {
+      const errors = res.filter(response => (response instanceof HttpError));
+
+      if(errors.length !== 0) {
+        return errors[0];
+      } else {
+        return res[0];
+      }
+    });
+  }
+
+  /**
+   * Set hsl color
+   * 
+   * @param {number} h 
+   * @param {number} s 
+   * @param {number} l
+   * 
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
+   */
+  setHslColor(h, s, l) {
+    const hsv = convert.hsl.hsv([h, s, l]);
+
+    return this.setHsvColor(hsv[0], hsv[1], hsv[2]);
+  }
+
+  /**
+   * Set hex color
+   * 
+   * @param {string} hexString
+   * 
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
+   */
+  setHexColor(hexString) {
+    const hsv = convert.hex.hsv(hexString);
+
+    return this.setHsvColor(hsv[0], hsv[1], hsv[2]);
+  }
+
+  /**
+   * Set rgb color
+   * 
+   * @param {number} r
+   * @param {number} g 
+   * @param {number} b
+   * 
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
+   */
+  setRgbColor(r, g, b) {
+    const hsv = convert.rgb.hsv([r, g, b]);
+
+    return this.setHsvColor(hsv[0], hsv[1], hsv[2]);
   }
 }
 
