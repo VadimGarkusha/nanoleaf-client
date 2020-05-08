@@ -263,7 +263,7 @@ class NanoleafClient {
    */
   setEffect(value) {
     return this._client.putRequest('effects', {
-      select: { value }
+      select: value
     });
   }
 
