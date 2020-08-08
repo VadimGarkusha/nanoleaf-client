@@ -679,6 +679,30 @@ describe('NanoleafClient setGlobalOrientation', () => {
   });
 });
 
+describe('NanoleafClient setHsvColor', () => {
+  it('Returns Successful Response', () => {
+    const client = new NanoleafClient(host);
+    const response = new HttpResponse(200, 'Successful request');
+
+    mockHttpClientPutRequest(client, response);
+
+    return client.setHsvColor(1 ,2, 3).then(result => {
+      assertForGenericRequest(result, response);
+    });
+  });
+
+  it('Returns Error', () => {
+    const client = new NanoleafClient(host);
+    const error = new HttpError(500, 'Internal Server error');
+
+    mockHttpClientPutRequest(client, error);
+
+    return client.setHsvColor().then(result => {
+      assertForGenericRequest(result, error);
+    });
+  });
+});
+
 const assertForGenericRequest = (expectedResult, result) => {
   expect(typeof result).toBe(typeof expectedResult);
   expect(result.message).toBe(expectedResult.message);

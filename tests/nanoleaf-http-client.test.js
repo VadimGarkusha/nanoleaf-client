@@ -163,7 +163,7 @@ describe('NanoleafHttpClient _handleErrorResponse', () => {
     (statusCode, message) => {
       const httpClient = new NanoleafHttpClient(host);
 
-      const httpError = httpClient._handleErrorResponse(statusCode);
+      const httpError = httpClient._handleErrorResponse({response: {status: statusCode} });
       expect(httpError).toBeInstanceOf(HttpError);
       expect(httpError.status).toBe(statusCode);
       expect(httpError.message).toBe(message);
