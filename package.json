@@ -1,6 +1,6 @@
 {
   "name": "nanoleaf-client",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Client app for Nanoleaf devices",
   "main": "src/index.js",
   "scripts": {
@@ -26,17 +26,17 @@
   "type": "module",
   "homepage": "https://github.com/VadimGarkusha/nanoleaf-client#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.19.2",
     "color-convert": "^2.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "babel-jest": "^25.1.0",
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "babel-jest": "^25.5.1",
     "babel-plugin-transform-default-import": "^1.0.0",
-    "coveralls": "^3.0.9",
+    "coveralls": "^3.1.0",
     "eslint": "^6.8.0",
-    "jest": "^25.1.0"
+    "jest": "^25.5.4"
   },
   "babel": {
     "presets": [
