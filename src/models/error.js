@@ -1,6 +1,6 @@
 /**
  * @property {number} status Http error status code
- * @property {number} message Http error description
+ * @property {text} message Http error description
  */
 class HttpError {
   constructor(status, message) {

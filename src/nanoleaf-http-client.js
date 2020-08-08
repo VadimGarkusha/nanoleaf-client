@@ -43,7 +43,7 @@ class NanoleafHttpClient {
         return response.data;
       })
       .catch(error => {
-        return this._handleErrorResponse(error.response.status);
+        return this._handleErrorResponse(error);
       });
   }
 
@@ -61,7 +61,7 @@ class NanoleafHttpClient {
         return this._handleSuccessResponse(response);
       })
       .catch(error => {
-        return this._handleErrorResponse(error.response.status);
+        return this._handleErrorResponse(error);
       });
   }
 
@@ -79,7 +79,7 @@ class NanoleafHttpClient {
         return this._handleSuccessResponse(response);
       })
       .catch(error => {
-        return this._handleErrorResponse(error.response.status);
+        return this._handleErrorResponse(error);
       });
   }
 
@@ -89,8 +89,14 @@ class NanoleafHttpClient {
    * @param {number} errorCode http error code
    * @returns {HttpError}
    */
-  _handleErrorResponse(statusCode) {
-    let message;
+  _handleErrorResponse(error) {
+    let message,
+      statusCode = 0;
+
+    if (error.response) {
+      statusCode = error.response.status;
+    } 
+    
     switch (statusCode) {
     case 400:
       message = 'Bad request';
@@ -110,6 +116,8 @@ class NanoleafHttpClient {
     case 500:
       message = 'Internal server error';
       break;
+    default:
+      message = 'The device is offline';
     }
 
     return new HttpError(statusCode, message);
