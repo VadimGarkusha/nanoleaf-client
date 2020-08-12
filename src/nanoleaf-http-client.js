@@ -43,7 +43,7 @@ class NanoleafHttpClient {
         return response.data;
       })
       .catch(error => {
-        return this._handleErrorResponse(error);
+        throw this._handleErrorResponse(error);
       });
   }
 
@@ -61,7 +61,7 @@ class NanoleafHttpClient {
         return this._handleSuccessResponse(response);
       })
       .catch(error => {
-        return this._handleErrorResponse(error);
+        throw this._handleErrorResponse(error);
       });
   }
 
@@ -79,7 +79,7 @@ class NanoleafHttpClient {
         return this._handleSuccessResponse(response);
       })
       .catch(error => {
-        return this._handleErrorResponse(error);
+        throw this._handleErrorResponse(error);
       });
   }
 
@@ -95,8 +95,8 @@ class NanoleafHttpClient {
 
     if (error.response) {
       statusCode = error.response.status;
-    } 
-    
+    }
+
     switch (statusCode) {
     case 400:
       message = 'Bad request';

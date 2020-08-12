@@ -5,7 +5,6 @@ import {
   Hue,
   PowerStatus,
   Saturation,
-  HttpError,
   Info,
 } from './models/index.js';
 import NanoleafHttpClient from './nanoleaf-http-client.js';
@@ -30,7 +29,7 @@ class NanoleafClient {
    */
   getPowerStatus() {
     return this._client.getRequest('state/on').then(response => {
-      return response instanceof HttpError ? response : new PowerStatus(response);
+      return new PowerStatus(response);
     });
   }
 
@@ -41,7 +40,7 @@ class NanoleafClient {
    */
   getInfo() {
     return this._client.getRequest().then(response => {
-      return response instanceof HttpError ? response : new Info(response);
+      return new Info(response);
     });
   }
 
@@ -72,8 +71,6 @@ class NanoleafClient {
    */
   authorize() {
     return this._client.postRequest('new').then((response) => {
-      if (response instanceof HttpError) return response;
-
       const { auth_token } = response.data;
       this._client.authorize(auth_token);
 
@@ -88,7 +85,7 @@ class NanoleafClient {
    */
   getSaturation() {
     return this._client.getRequest('state/sat').then(response => {
-      return response instanceof HttpError ? response : new Saturation(response);
+      return new Saturation(response);
     });
   }
 
@@ -123,7 +120,7 @@ class NanoleafClient {
    */
   getBrightness() {
     return this._client.getRequest('state/brightness').then(response => {
-      return response instanceof HttpError ? response : new Brightness(response);
+      return new Brightness(response);
     });
   }
 
@@ -174,7 +171,7 @@ class NanoleafClient {
    */
   getHue() {
     return this._client.getRequest('state/hue').then(response => {
-      return response instanceof HttpError ? response : new Hue(response);
+      return new Hue(response);
     });
   }
 
@@ -209,7 +206,7 @@ class NanoleafClient {
    */
   getColorTemperature() {
     return this._client.getRequest('state/ct').then(response => {
-      return response instanceof HttpError ? response : new ColorTemperature(response);
+      return new ColorTemperature(response);
     });
   }
 
@@ -285,7 +282,7 @@ class NanoleafClient {
     return this._client
       .getRequest('panelLayout/globalOrientation')
       .then(response => {
-        return response instanceof HttpError ? response : new GlobalOrientation(response);
+        return new GlobalOrientation(response);
       });
   }
 
@@ -316,13 +313,9 @@ class NanoleafClient {
     const brightnessPromise = this.setBrightness(v);
 
     return Promise.all([huePromise, satPromise, brightnessPromise]).then(res => {
-      const errors = res.filter(response => (response instanceof HttpError));
-
-      if(errors.length !== 0) {
-        return errors[0];
-      } else {
-        return res[0];
-      }
+      return res[0];
+    }, error => {
+      throw error;
     });
   }
 
