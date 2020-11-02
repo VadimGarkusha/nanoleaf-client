@@ -45,6 +45,15 @@ class NanoleafClient {
   }
 
   /**
+   * Identify panels
+   * 
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
+   */
+  identify() {
+    return this._client.putRequest('identify');
+  }
+
+  /**
    *  Turn on device
    *
    * @returns {Promise<HttpResponse>|Promise<HttpError>}
