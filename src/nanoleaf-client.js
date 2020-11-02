@@ -65,6 +65,16 @@ class NanoleafClient {
   }
 
   /**
+   * Switch power on/off
+   * 
+   * @param {boolean} power 
+   * @returns {Promise<HttpResponse>|Promise<HttpError>}
+   */
+  power(power) {
+    return this._client.putRequest('state', { on: { value: power } });
+  }
+
+  /**
    * Get authorization token
    *
    * @returns {Promise<string>|Promise<HttpError>} Auth token

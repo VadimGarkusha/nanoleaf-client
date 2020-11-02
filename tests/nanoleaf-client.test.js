@@ -148,6 +148,55 @@ describe('NanoleafClient turnOff', () => {
   });
 });
 
+describe('NanoleafClient power, power off', () => {
+  it('Returns Successful Response', () => {
+    const client = new NanoleafClient(host);
+    const response = new HttpResponse(204, 'Successful request');
+
+    mockHttpClientPutRequest(client, response);
+
+    return client.power(false).then(result => {
+      assertForGenericRequest(result, response);
+    });
+  });
+
+  it('Returns Error', () => {
+    const client = new NanoleafClient(host);
+    const error = new HttpError(500, 'Internal Server error');
+
+    mockHttpClientPutRequest(client, error);
+
+    return client.power(false).then(result => {
+      assertForGenericRequest(result, error);
+    });
+  });
+});
+
+
+describe('NanoleafClient power, power on', () => {
+  it('Returns Successful Response', () => {
+    const client = new NanoleafClient(host);
+    const response = new HttpResponse(204, 'Successful request');
+
+    mockHttpClientPutRequest(client, response);
+
+    return client.power(true).then(result => {
+      assertForGenericRequest(result, response);
+    });
+  });
+
+  it('Returns Error', () => {
+    const client = new NanoleafClient(host);
+    const error = new HttpError(500, 'Internal Server error');
+
+    mockHttpClientPutRequest(client, error);
+
+    return client.power(true).then(result => {
+      assertForGenericRequest(result, error);
+    });
+  });
+});
+
 describe('NanoleafClient authorize', () => {
   it('Returns Auth Token', () => {
     const client = new NanoleafClient(host);
