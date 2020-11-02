@@ -100,6 +100,30 @@ describe('NanoleafClient getInfo', () => {
   });
 });
 
+describe('NanoleafClient Identify', () => {
+  it('Returns Successful Response', () => {
+    const client = new NanoleafClient(host);
+    const response = new HttpResponse(200, 'Successful request');
+
+    mockHttpClientPutRequest(client, response);
+
+    return client.identify().then(result => {
+      assertForGenericRequest(result, response);
+    });
+  });
+
+  it('Returns Error', () => {
+    const client = new NanoleafClient(host);
+    const error = new HttpError(500, 'Internal Server error');
+
+    mockHttpClientPutRequest(client, error);
+
+    return client.identify().then(result => {
+      assertForGenericRequest(result, error);
+    });
+  });
+});
+
 describe('NanoleafClient turnOn', () => {
   it('Returns Successful Response', () => {
     const client = new NanoleafClient(host);
