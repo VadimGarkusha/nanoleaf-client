@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import axios from 'axios';
 import c from './const.js';
 import { HttpError, HttpResponse } from './models/index.js';
@@ -38,7 +39,7 @@ class NanoleafHttpClient {
    */
   getRequest(url = '') {
     return axios
-      .get(this._host + url)
+      .get(this._host + url, { cancelToken: this._getCancellationToken() })
       .then(response => {
         return response.data;
       })
@@ -56,7 +57,7 @@ class NanoleafHttpClient {
    */
   putRequest(url, body) {
     return axios
-      .put(this._host + url, body)
+      .put(this._host + url, body, { cancelToken: this._getCancellationToken() })
       .then(response => {
         return this._handleSuccessResponse(response);
       })
@@ -74,7 +75,7 @@ class NanoleafHttpClient {
    */
   postRequest(url) {
     return axios
-      .post(this._host + url)
+      .post(this._host + url, {}, { cancelToken: this._getCancellationToken() })
       .then(response => {
         return this._handleSuccessResponse(response);
       })
@@ -135,6 +136,19 @@ class NanoleafHttpClient {
       response.statusText,
       response.data
     );
+  }
+
+  /**
+   * Creates cancellation token with timeout
+   * 
+   */
+  _getCancellationToken() {
+    let source = Axios.CancelToken.source();
+    setTimeout(() => {
+      source.cancel();
+    }, c.CONNECTION_TIMEOUT_SECONDS * 1000);
+
+    return source.token;
   }
 }
 
