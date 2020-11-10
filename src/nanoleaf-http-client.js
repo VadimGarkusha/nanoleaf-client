@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import axios from 'axios';
 import c from './const.js';
 import { HttpError, HttpResponse } from './models/index.js';
@@ -143,7 +142,7 @@ class NanoleafHttpClient {
    * 
    */
   _getCancellationToken() {
-    let source = Axios.CancelToken.source();
+    let source = axios.CancelToken.source();
     setTimeout(() => {
       source.cancel();
     }, c.CONNECTION_TIMEOUT_SECONDS * 1000);
