@@ -621,14 +621,14 @@ describe('NanoleafClient getColorMode', () => {
   });
 });
 
-describe('NanoleafClient getEffect', () => {
+describe('NanoleafClient getSelectedEffect', () => {
   it('Returns Effect', () => {
     const client = new NanoleafClient(host);
     const effect = 'effect';
 
     mockHttpClientGetRequest(client, effect);
 
-    return client.getEffect().then(result => {
+    return client.getSelectedEffect().then(result => {
       expect(result).toBe(effect);
     });
   });
@@ -639,9 +639,33 @@ describe('NanoleafClient getEffect', () => {
 
     mockHttpClientGetRequest(client, error);
 
-    return client.getEffect().then(result => {
+    return client.getSelectedEffect().then(result => {
       expect(result.message).toBe(error.message);
       expect(result.status).toBe(error.status);
+    });
+  });
+});
+
+describe('NanoleafClient getSelectedEffect', () => {
+  it('Returns Successful Response', () => {
+    const client = new NanoleafClient(host);
+    const response = new HttpResponse(200, 'Successful request');
+
+    mockHttpClientPutRequest(client, response);
+
+    return client.getSelectedEffect().then(result => {
+      assertForGenericRequest(result, response);
+    });
+  });
+
+  it('Returns Error', () => {
+    const client = new NanoleafClient(host);
+    const error = new HttpError(500, 'Internal Server error');
+
+    mockHttpClientPutRequest(client, error);
+
+    return client.getSelectedEffect().then(result => {
+      assertForGenericRequest(result, error);
     });
   });
 });

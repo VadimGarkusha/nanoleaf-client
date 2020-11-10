@@ -6,6 +6,7 @@ import {
   PowerStatus,
   Saturation,
   Info,
+  Effect
 } from './models/index.js';
 import NanoleafHttpClient from './nanoleaf-http-client.js';
 import convert from 'color-convert';
@@ -263,12 +264,29 @@ class NanoleafClient {
   }
 
   /**
-   * Get Effect
+   * Get Selected Effect
    *
    * @returns {Promise<string>|Promise<HttpError>}
    */
-  getEffect() {
+  getSelectedEffect() {
     return this._client.getRequest('effects/select');
+  }
+
+  /**
+   * Get Effect Info
+   * 
+   * @param {string} effectName 
+   * @returns {Promise<Effect>|Promise<HttpError>}
+   */
+  getEffectInfo(effectName) {
+    return this._client.putRequest('effects', {
+      write: {
+        command: 'request',
+        animName: effectName
+      }
+    }).then(response => {
+      return new Effect(response.data);
+    });
   }
 
   /**

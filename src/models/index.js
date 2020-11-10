@@ -8,6 +8,7 @@ import PowerStatus from './power-status.js';
 import Saturation from './saturation.js';
 import HttpResponse from './response.js';
 import Info from './info.js';
+import Effect from './effect.js';
 
 export {
   Brightness,
@@ -20,4 +21,5 @@ export {
   PowerStatus,
   Saturation,
   Info,
+  Effect,
 };
