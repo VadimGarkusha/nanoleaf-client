@@ -646,14 +646,14 @@ describe('NanoleafClient getSelectedEffect', () => {
   });
 });
 
-describe('NanoleafClient getSelectedEffect', () => {
+describe('NanoleafClient getEffectInfo', () => {
   it('Returns Successful Response', () => {
     const client = new NanoleafClient(host);
     const response = new HttpResponse(200, 'Successful request');
 
     mockHttpClientPutRequest(client, response);
 
-    return client.getSelectedEffect().then(result => {
+    return client.getEffectInfo().then(result => {
       assertForGenericRequest(result, response);
     });
   });
@@ -664,7 +664,7 @@ describe('NanoleafClient getSelectedEffect', () => {
 
     mockHttpClientPutRequest(client, error);
 
-    return client.getSelectedEffect().then(result => {
+    return client.getEffectInfo().then(result => {
       assertForGenericRequest(result, error);
     });
   });
