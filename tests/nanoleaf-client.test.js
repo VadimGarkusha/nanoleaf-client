@@ -9,7 +9,8 @@ import {
   Brightness,
   Hue,
   ColorTemperature,
-  GlobalOrientation
+  GlobalOrientation,
+  Effect,
 } from '../src/models/index.js';
 
 jest.mock('../src/nanoleaf-http-client.js');
@@ -621,14 +622,14 @@ describe('NanoleafClient getColorMode', () => {
   });
 });
 
-describe('NanoleafClient getEffect', () => {
+describe('NanoleafClient getSelectedEffect', () => {
   it('Returns Effect', () => {
     const client = new NanoleafClient(host);
     const effect = 'effect';
 
     mockHttpClientGetRequest(client, effect);
 
-    return client.getEffect().then(result => {
+    return client.getSelectedEffect().then(result => {
       expect(result).toBe(effect);
     });
   });
@@ -639,9 +640,58 @@ describe('NanoleafClient getEffect', () => {
 
     mockHttpClientGetRequest(client, error);
 
-    return client.getEffect().then(result => {
+    return client.getSelectedEffect().then(result => {
       expect(result.message).toBe(error.message);
       expect(result.status).toBe(error.status);
+    });
+  });
+});
+
+describe('NanoleafClient getEffectInfo', () => {
+  it('Returns Successful Response', () => {
+    const client = new NanoleafClient(host);
+    const response = {
+      version: '2.0',
+      animName: 'Nemo',
+      animType: 'plugin',
+      colorType: 'HSB',
+      palette: [
+        { hue: 23, saturation: 100, brightness: 100, probability: 0 },
+        { hue: 108, saturation: 5, brightness: 100, probability: 0 }
+      ],
+      pluginType: 'color',
+      pluginUuid: '70b7c636-6bf8-491f-89c1-f4103508d642',
+      pluginOptions: [
+        { name: 'delayTime', value: 12 },
+        { name: 'loop', value: true },
+        { name: 'mainColorProb', value: 80 },
+        { name: 'transTime', value: 20 }
+      ],
+      hasOverlay: false
+    };
+
+    mockHttpClientPutRequest(client, response);
+
+    return client.getEffectInfo().then(result => {
+      expect(result).toBeInstanceOf(Effect);
+      expect(result.version).toBe(response.version);
+      expect(result.animName).toBe(response.animName);
+      expect(result.animType).toBe(response.animType);
+      expect(result.colorType).toBe(response.colorType);
+      expect(result.pluginType).toBe(response.pluginType);
+      expect(result.hasOverlay).toBe(response.pluginUuid);
+      expect(result.pluginUuid).toBe(response.hasOverlay);
+    });
+  });
+
+  it('Returns Error', () => {
+    const client = new NanoleafClient(host);
+    const error = new HttpError(500, 'Internal Server error');
+
+    mockHttpClientPutRequest(client, error);
+
+    return client.getEffectInfo().then(result => {
+      assertForGenericRequest(result, error);
     });
   });
 });
