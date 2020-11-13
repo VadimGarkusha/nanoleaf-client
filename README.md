@@ -35,6 +35,67 @@ To install the dependencies, run this in the application folder from the command
 $ npm install nanoleaf-client
 ```
 
+## Supported Methods
+
+### [Service Discovery](https://github.com/VadimGarkusha/nanoleaf-client/blob/master/src/service-discovery.js)
+* discoverNanoleaf
+
+### [Nanoleaf Client](https://github.com/VadimGarkusha/nanoleaf-client/blob/master/src/nanoleaf-client.js)
+
+#### General Requests
+
+* getInfo
+* identify
+* authorize
+* getGlobalOrientation
+
+#### Power
+
+* turnOn
+* turnOff
+* power
+* getPowerStatus
+
+#### Saturation
+
+* getSaturation
+* setSaturation
+* incrementSaturation
+
+#### Brightness
+
+* getBrightness
+* setBrightness
+* increaseBrightness
+* setDurationBrightness
+
+#### Hue
+
+* getHue
+* setHue
+* increaseHue
+
+#### Color Temperature
+
+* getColorTemperature
+* setColorTemperature
+* incrementColorTemperature
+
+#### Effect/Theme
+
+* getColorMode
+* getSelectedEffect
+* getEffectInfo
+* setEffect
+* getEffectList
+
+#### Color
+
+* setHsvColor
+* setHslColor
+* setHexColor
+* setRgbColor
+
 ## Service Discovery
 
 In order to use the client you need to know your device IP on the network and a user token.
