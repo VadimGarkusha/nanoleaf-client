@@ -75,50 +75,50 @@ client.authorize().then(token => {
 
 #### General Requests
 
-* getInfo
-* identify
-* authorize
-* getGlobalOrientation
+* `getInfo()` - returns __object__ with information about current state of device
+* `identify()` - causes panels to flash in unison, returns response with status if successful
+* `authorize()` - authorizes nanoleaf client for future requests and returns __string__ auth token
+* `getGlobalOrientation()` - returns __object__ with global orientation value
 
 #### Power
-* turnOn
-* turnOff
-* power
-* getPowerStatus
+* `turnOn()` - turns on the device
+* `turnOff()` - turns off the device
+* `power(power)` - accepts __boolean__ parameter and sets device power status
+* `getPowerStatus()` - returns __object__ with power status
 
 #### Saturation
-* getSaturation
-* setSaturation
-* incrementSaturation
+* `getSaturation()` - returns __object__ with current saturation value
+* `setSaturation(value)` - accepts __numerical__ parameter and sets saturation value
+* `incrementSaturation(increment)` - accepts __numerical__ parameter and incerements saturation value by it
 
 #### Brightness
-* getBrightness
-* setBrightness
-* increaseBrightness
-* setDurationBrightness
+* `getBrightness()` - returns __object__ with current brightness value
+* `setBrightness(value)` - accepts __numerical__ parameter and sets brightness value
+* `increaseBrightness(increment)` - accepts __numerical__ parameter and incerements brightness value by it
+* `setDurationBrightness(value, duration)` - accepts two __numerical__ parameter and sets brightness `value` for `duration` period
 
 #### Hue
-* getHue
-* setHue
-* increaseHue
+* `getHue()` - returns __object__ with current hue value
+* `setHue(value)` - accepts __numerical__ parameter and sets hue value
+* `increaseHue(increment)` - accepts __numerical__ parameter and incerements hue value by it
 
 #### Color Temperature
-* getColorTemperature
-* setColorTemperature
-* incrementColorTemperature
+* `getColorTemperature()` - returns __current__ color temperature value
+* `setColorTemperature(value)` - accepts __numerical__ parameter and sets color temperature value
+* `incrementColorTemperature(increment)` - accepts __numerical__ parameter and incerements color temperature value by it
 
 #### Effect/Theme
-* getColorMode
-* getSelectedEffect
-* getEffectInfo
-* setEffect
-* getEffectList
+* `getColorMode()` - returns __string__ with current color temperature value `ct` (color temperature), `hs` (hue/saturation), or `effect`
+* `getSelectedEffect()` - returns __string__ with selected effect
+* `getEffectInfo(effectName)` - accepts __string__ with effect name and returns __object__ with effect properties
+* `setEffect(value)` - accepts __string__ with effect names and sets it as current effect
+* `getEffectList()` - returns __array of strings__ with available effects
 
 #### Color
-* setHsvColor
-* setHslColor
-* setHexColor
-* setRgbColor
+* `setHsvColor(h, s, v)` - accepts tree __numerical__ parameters and sets hsv color based on them 
+* `setHslColor(h, s, l)` - accepts tree __numerical__ parameters and sets hsl color based on them 
+* `setHexColor(hexString)` - accepts __string__ parameter with hex values and sets color based on it
+* `setRgbColor(r, g, b)` - accepts tree __numerical__ parameters and sets rgb color based on them 
 
 ## Examples
 
