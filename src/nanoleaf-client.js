@@ -112,7 +112,7 @@ class NanoleafClient {
   /**
    * Set saturation
    *
-   * @param {Promise<HttpResponse>|Promise<HttpError>} value
+   * @param {number} value
    * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   setSaturation(value) {
@@ -292,7 +292,7 @@ class NanoleafClient {
   /**
    * Set Effect
    *
-   * @param {number} value
+   * @param {string} value
    * @returns {Promise<HttpResponse>|Promise<HttpError>}
    */
   setEffect(value) {
