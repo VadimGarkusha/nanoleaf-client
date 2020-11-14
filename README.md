@@ -115,10 +115,10 @@ client.authorize().then(token => {
 * `getEffectList()` - returns __array of strings__ with available effects
 
 #### Color
-* `setHsvColor(h, s, v)` - accepts tree __numerical__ parameters and sets hsv color based on them 
-* `setHslColor(h, s, l)` - accepts tree __numerical__ parameters and sets hsl color based on them 
+* `setHsvColor(h, s, v)` - accepts three __numerical__ parameters and sets hsv color based on them 
+* `setHslColor(h, s, l)` - accepts three __numerical__ parameters and sets hsl color based on them 
 * `setHexColor(hexString)` - accepts __string__ parameter with hex values and sets color based on it
-* `setRgbColor(r, g, b)` - accepts tree __numerical__ parameters and sets rgb color based on them 
+* `setRgbColor(r, g, b)` - accepts three __numerical__ parameters and sets rgb color based on them 
 
 ## Examples
 
