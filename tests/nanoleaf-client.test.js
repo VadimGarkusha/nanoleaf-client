@@ -641,7 +641,7 @@ describe('NanoleafClient getSelectedEffect', () => {
 
     mockHttpClientGetRequest(client, error);
 
-    return client.getEff().then(result => {
+    return client.getSelectedEffect().then(result => {
       expect(result.message).toBe(error.message);
       expect(result.status).toBe(error.status);
     });
@@ -661,7 +661,7 @@ describe('NanoleafClient getAllEffectsInfo', () => {
         }
       ]};
 
-    mockHttpClientGetRequest(client, effectsDetails);
+    mockHttpClientPutRequest(client, effectsDetails);
 
     return client.getEffectsInfo().then(result => {
       expect(EffectsDetails).toBeInstanceOf(EffectsDetails);
@@ -676,7 +676,7 @@ describe('NanoleafClient getAllEffectsInfo', () => {
     const client = new NanoleafClient(host);
     const error = new HttpError(500, 'Internal Server error');
 
-    mockHttpClientGetRequest(client, error);
+    mockHttpClientPutRequest(client, error);
 
     return client.getEffectsInfo().then(result => {
       expect(result.message).toBe(error.message);
