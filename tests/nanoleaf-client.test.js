@@ -11,6 +11,7 @@ import {
   ColorTemperature,
   GlobalOrientation,
   Effect,
+  EffectsDetails,
 } from '../src/models/index.js';
 
 jest.mock('../src/nanoleaf-http-client.js');
@@ -641,6 +642,43 @@ describe('NanoleafClient getSelectedEffect', () => {
     mockHttpClientGetRequest(client, error);
 
     return client.getSelectedEffect().then(result => {
+      expect(result.message).toBe(error.message);
+      expect(result.status).toBe(error.status);
+    });
+  });
+});
+
+describe('NanoleafClient getAllEffectsInfo', () => {
+  it('Returns Effects', () => {
+    const client = new NanoleafClient(host);
+    const effectsDetails = {
+      animations: [
+        {
+          version: '2.0',
+          animName: 'Blood Dripping',
+          animType: 'plugin',
+          colorType: 'HSB',
+        }
+      ]};
+
+    mockHttpClientPutRequest(client, effectsDetails);
+
+    return client.getEffectsInfo().then(result => {
+      expect(EffectsDetails).toBeInstanceOf(EffectsDetails);
+      expect(effectsDetails.animations[0].version).toBe(result.animations[0].version);
+      expect(effectsDetails.animations[0].animName).toBe(result.animations[0].animName);
+      expect(effectsDetails.animations[0].animType).toBe(result.animations[0].animType);
+      expect(effectsDetails.animations[0].colorType).toBe(result.animations[0].colorType);
+    });
+  });
+
+  it('Returns Error', () => {
+    const client = new NanoleafClient(host);
+    const error = new HttpError(500, 'Internal Server error');
+
+    mockHttpClientPutRequest(client, error);
+
+    return client.getEffectsInfo().then(result => {
       expect(result.message).toBe(error.message);
       expect(result.status).toBe(error.status);
     });
