@@ -658,11 +658,6 @@ describe('NanoleafClient getAllEffectsInfo', () => {
           animName: 'Blood Dripping',
           animType: 'plugin',
           colorType: 'HSB',
-          palette: [Array],
-          pluginType: 'color',
-          pluginUuid: 'ba632d3e-9c2b-4413-a965-510c839b3f71',
-          pluginOptions: [Array],
-          hasOverlay: false
         }
       ]};
 
@@ -670,10 +665,10 @@ describe('NanoleafClient getAllEffectsInfo', () => {
 
     return client.getSelectedEffect().then(result => {
       expect(EffectsDetails).toBeInstanceOf(EffectsDetails);
-      expect(effectsDetails.animations[0].version).toBe(effectsDetails[0].version);
-      expect(effectsDetails.animations[0].animName).toBe(effectsDetails[0].animName);
-      expect(effectsDetails.animations[0].animType).toBe(effectsDetails[0].animType);
-      expect(effectsDetails.animations[0].colorType).toBe(effectsDetails[0].colorType);
+      expect(effectsDetails.animations[0].version).toBe(result.animations[0].version);
+      expect(effectsDetails.animations[0].animName).toBe(result.animations[0].animName);
+      expect(effectsDetails.animations[0].animType).toBe(result.animations[0].animType);
+      expect(effectsDetails.animations[0].colorType).toBe(result.animations[0].colorType);
     });
   });
 
