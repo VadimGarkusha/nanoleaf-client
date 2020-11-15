@@ -293,7 +293,7 @@ class NanoleafClient {
   /**
    * Get all effects information
    * 
-   * @returns {Promise<AllEffectDetails>|Promise<HttpError>}
+   * @returns {Promise<EffectsDetails>|Promise<HttpError>}
    */
   getEffectsInfo() {
     return this._client.putRequest('effects', {
