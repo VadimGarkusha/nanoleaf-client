@@ -9,6 +9,7 @@ import Saturation from './saturation.js';
 import HttpResponse from './response.js';
 import Info from './info.js';
 import Effect from './effect.js';
+import EffectsDetails from './effects-details.js';
 
 export {
   Brightness,
@@ -22,4 +23,5 @@ export {
   Saturation,
   Info,
   Effect,
+  EffectsDetails,
 };

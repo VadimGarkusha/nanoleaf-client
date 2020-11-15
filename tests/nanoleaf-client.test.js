@@ -11,6 +11,7 @@ import {
   ColorTemperature,
   GlobalOrientation,
   Effect,
+  EffectsDetails,
 } from '../src/models/index.js';
 
 jest.mock('../src/nanoleaf-http-client.js');
@@ -631,6 +632,48 @@ describe('NanoleafClient getSelectedEffect', () => {
 
     return client.getSelectedEffect().then(result => {
       expect(result).toBe(effect);
+    });
+  });
+
+  it('Returns Error', () => {
+    const client = new NanoleafClient(host);
+    const error = new HttpError(500, 'Internal Server error');
+
+    mockHttpClientGetRequest(client, error);
+
+    return client.getSelectedEffect().then(result => {
+      expect(result.message).toBe(error.message);
+      expect(result.status).toBe(error.status);
+    });
+  });
+});
+
+describe('NanoleafClient getAllEffectsInfo', () => {
+  it('Returns Effects', () => {
+    const client = new NanoleafClient(host);
+    const effectsDetails = {
+      animations: [
+        {
+          version: '2.0',
+          animName: 'Blood Dripping',
+          animType: 'plugin',
+          colorType: 'HSB',
+          palette: [Array],
+          pluginType: 'color',
+          pluginUuid: 'ba632d3e-9c2b-4413-a965-510c839b3f71',
+          pluginOptions: [Array],
+          hasOverlay: false
+        }
+      ]};
+
+    mockHttpClientGetRequest(client, effectsDetails);
+
+    return client.getSelectedEffect().then(result => {
+      expect(EffectsDetails).toBeInstanceOf(EffectsDetails);
+      expect(effectsDetails.animations[0].version).toBe(effectsDetails[0].version);
+      expect(effectsDetails.animations[0].animName).toBe(effectsDetails[0].animName);
+      expect(effectsDetails.animations[0].animType).toBe(effectsDetails[0].animType);
+      expect(effectsDetails.animations[0].colorType).toBe(effectsDetails[0].colorType);
     });
   });
 
