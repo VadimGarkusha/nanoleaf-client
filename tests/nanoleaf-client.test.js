@@ -641,7 +641,7 @@ describe('NanoleafClient getSelectedEffect', () => {
 
     mockHttpClientGetRequest(client, error);
 
-    return client.getSelectedEffect().then(result => {
+    return client.getEff().then(result => {
       expect(result.message).toBe(error.message);
       expect(result.status).toBe(error.status);
     });
@@ -663,7 +663,7 @@ describe('NanoleafClient getAllEffectsInfo', () => {
 
     mockHttpClientGetRequest(client, effectsDetails);
 
-    return client.getSelectedEffect().then(result => {
+    return client.getEffectsInfo().then(result => {
       expect(EffectsDetails).toBeInstanceOf(EffectsDetails);
       expect(effectsDetails.animations[0].version).toBe(result.animations[0].version);
       expect(effectsDetails.animations[0].animName).toBe(result.animations[0].animName);
@@ -678,7 +678,7 @@ describe('NanoleafClient getAllEffectsInfo', () => {
 
     mockHttpClientGetRequest(client, error);
 
-    return client.getSelectedEffect().then(result => {
+    return client.getEffectsInfo().then(result => {
       expect(result.message).toBe(error.message);
       expect(result.status).toBe(error.status);
     });
