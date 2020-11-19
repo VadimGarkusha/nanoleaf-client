@@ -27,7 +27,8 @@
   "homepage": "https://github.com/VadimGarkusha/nanoleaf-client#readme",
   "dependencies": {
     "axios": "^0.19.2",
-    "color-convert": "^2.0.1"
+    "color-convert": "^2.0.1",
+    "eventsource": "^1.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
