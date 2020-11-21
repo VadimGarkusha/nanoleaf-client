@@ -13,6 +13,12 @@ class EventListener {
     this._host = new String(`http://${host}:${c.NANOLEAF_PORT}/api/v1/${token}/events?`);
   }
 
+  /**
+   * callback method to be executed after message is received, pass callback function to process the callback message
+   * 
+   * @param {Array.[number]} events Array of event ids to subscrive. Available ids are 1-4. 1 - State, 2 - Layout, 3 - Effects, 4 - Touch
+   * @param {function({ type: string, data: { events: Array.<{attr: number, value: any}>}, lastEventId: number, origin: string})} callback method to be executed after message is received. 
+   */
   subscribe(events, callback) {
     const source = new EventSource(this._host + this._getEventsQueryStr(events));
 
@@ -33,8 +39,6 @@ class EventListener {
       if(source.readyState === 0) {
         console.log(`Connection could not be established... URL: ${source.url}`);
       }
-
-      source.close();
     }, 3000);
   }
 
