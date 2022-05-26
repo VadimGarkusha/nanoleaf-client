@@ -28,7 +28,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "color-convert": "^2.0.1",
-    "eventsource": "^1.0.7"
+    "eventsource": "^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
